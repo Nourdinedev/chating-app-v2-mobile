@@ -28,20 +28,20 @@ function jsTask() {
 }
 
 // Browsersync
-function browserSyncServe(cb) {
-   browsersync.init({
-      server: {
-         baseDir: ".",
-      },
-      notify: {
-         styles: {
-            top: "auto",
-            bottom: "0",
-         },
-      },
-   });
-   cb();
-}
+// function browserSyncServe(cb) {
+//    browsersync.init({
+//       server: {
+//          baseDir: ".",
+//       },
+//       notify: {
+//          styles: {
+//             top: "auto",
+//             bottom: "0",
+//          },
+//       },
+//    });
+//    cb();
+// }
 function browserSyncReload(cb) {
    browsersync.reload();
    cb();
@@ -57,4 +57,4 @@ function watchTask() {
 }
 
 // Default Gulp Task
-exports.default = series(scssTask, jsTask, browserSyncServe, watchTask);
+exports.default = series(scssTask, jsTask, watchTask);
