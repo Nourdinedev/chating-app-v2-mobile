@@ -21,6 +21,10 @@ app.get("/register", function (req, res) {
    res.render("register.html");
 });
 
+app.get("/chat", function (req, res) {
+   res.render("chat.html");
+});
+
 // app.get("/register", function (req, res) {
 //    res.render("register.html");
 // });
