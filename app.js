@@ -57,6 +57,11 @@ app.get("/chat", (req, res) => {
    res.sendFile(path.join(__dirname, "./views/chat.html"));
 });
 
+app.get("/profile", (req, res) => {
+   // res.render("chat.html"); //using EJS
+   res.sendFile(path.join(__dirname, "./views/profile.html"));
+});
+
 const PORT = 3000 || process.env.PORT;
 
 server.listen(PORT, () => console.log(`serving on port: ${PORT}`));

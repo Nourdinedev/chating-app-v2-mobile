@@ -16,17 +16,43 @@ body {
    box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.433);
 }
 //-------------------------------------Room info-------------------------------------//
-.room-info {
-   display: grid;
+.add-friend {
    grid-column: 1 / 12;
    grid-row: 1 / 2;
    background-color: rgb(245, 245, 245);
 
-   div {
-      text-align: center;
-      align-self: center;
-      font-size: larger;
-      font-weight: 100;
+   &__form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      height: 100%;
+      input {
+         background-color: rgb(250, 250, 250);
+         padding: 12px 20px;
+         border: 1px solid #aeaeae;
+         border-radius: 5px;
+         font-size: 1rem;
+      }
+      button {
+         justify-self: center;
+         background-color: #1e458d;
+         border: none;
+         padding: 12px;
+         border-radius: 25px;
+         margin-left: 15px;
+         transition: ease-in-out 0.2s;
+
+         &:hover {
+            opacity: 0.9;
+            cursor: pointer;
+         }
+
+         img {
+            width: 20px;
+            height: 20px;
+         }
+      }
    }
 }
 //-------------------------------------Online users list-------------------------------------//
@@ -90,25 +116,44 @@ body {
    }
 }
 //-------------------------------------User info-------------------------------------//
-.user-info {
+.user-container {
    grid-column: 12 / 25;
-   grid-row: 1 / 2;
    height: 100%;
-   display: flex;
-   align-items: center;
    box-shadow: 0 4px 10px -6px rgba(0, 0, 0, 0.433);
+}
 
-   &__icon {
-      width: 30px;
-      height: 30px;
-      justify-self: flex-start;
-      margin-left: 45px;
+.user {
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   height: 100%;
+
+   &__info {
+      display: flex;
+      &__icon {
+         width: 30px;
+      }
+      &__username {
+         margin-left: 15px;
+         color: rgb(118, 118, 118);
+         font-weight: 200;
+         font-size: 1.2rem;
+      }
    }
-   &__username {
-      margin-left: 15px;
-      color: rgb(118, 118, 118);
-      font-weight: 200;
-      font-size: 1.2rem;
+   &__btn {
+      text-decoration: none;
+      padding: 11px 35px;
+      font-size: 1rem;
+      font-weight: 100;
+      color: #1e458d;
+      border: 1px solid #1e458d;
+      border-radius: 50px;
+      transition: 0.1s ease-in;
+
+      &:hover {
+         opacity: 0.9;
+         cursor: pointer;
+      }
    }
 }
 //-------------------------------------Chat history-------------------------------------//
@@ -195,13 +240,14 @@ body {
          transition: ease-in-out;
          transition-duration: 0.2s;
 
+         &:hover {
+            opacity: 0.9;
+            cursor: pointer;
+         }
+
          img {
             width: 18px;
             height: 18px;
-         }
-         &:hover {
-            transform: scale(95%);
-            cursor: pointer;
          }
       }
    }
