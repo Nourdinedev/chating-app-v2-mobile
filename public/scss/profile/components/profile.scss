@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext");
+
+html {
+   position: relative;
+   overflow-x: hidden !important;
+}
+
+* {
+   box-sizing: border-box;
+}
+
+body {
+   margin: 0;
+   padding: 0;
+   font-family: "Quicksand", sans-serif;
+   background: linear-gradient(90deg, #2b357d, #697ec1);
+   height: 100vh;
+   
+}
+
+.wrapper {
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   z-index: -2;
+
+   @media screen and (max-width: 768px) {
+      height: auto;
+      min-height: 100vh;
+      padding-top: 100px;
+   }
+
+   .card{
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: minmax(100px, auto);
+      &__img{
+         justify-self: center;
+         grid-column: 1 / 7;
+         grid-row: 1 / 3;
+         height: 170px;
+         width: 170px;
+         border-radius: 100%;
+         border: 14px solid rgba(0, 0, 0, 0.781);
+         z-index: 20;
+      }
+      &__info{
+         grid-column: 1 / 7;
+         grid-row: 2 / 5;
+         background-color: rgb(255, 255, 255);
+         width: 750px;
+         border-radius: 10px;
+         box-shadow: 0 0 35px -10px rgba(0, 0, 0, 0.712);
+
+
+         &__name{
+            width: 100%;
+            height: 35px;
+            margin-top: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            span{
+               font-size: 1.5rem;
+               font-weight: 500;
+               text-align: center;
+
+            }
+
+         }
+
+         &__bio{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            span{
+               text-align: center;
+            }
+            
+         }
+         &__location{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 50px;
+            margin-bottom: 25px;
+
+
+            img{
+               height: 25px;
+               width: 25px;
+               margin-right: 5px;
+            }
+            p{
+               font-size: 1.2rem;
+            }
+         }
+         &__edit{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            button{
+               background-color: rgb(255, 255, 255);
+               padding: 15px 25px;
+               border-radius: 80px;
+               &:hover{
+                  opacity: 0.8;
+                  cursor: pointer;
+               }
+            }
+         }
+         
+      }
+   }
+
+
+}

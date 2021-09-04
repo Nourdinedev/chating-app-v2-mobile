@@ -4,15 +4,16 @@ body {
    font-family: "Noto Sans JP";
    margin: 0;
    padding: 0;
+   background: linear-gradient(90deg, #2b357d, #697ec1);
 }
 //-------------------------------------wrapper-------------------------------------//
 .wrapper {
    display: grid;
    grid-template-columns: repeat(24, 1fr);
    grid-auto-rows: minmax(100px, auto);
-   max-width: 1000px;
-   height: 700px;
-   margin: 65px auto;
+   max-width: 1140px;
+   height: 90vh;
+   margin: 5vh auto;
    box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.433);
 }
 //-------------------------------------Room info-------------------------------------//
@@ -25,10 +26,10 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-
       height: 100%;
       input {
          background-color: rgb(250, 250, 250);
+         width: 65%;
          padding: 12px 20px;
          border: 1px solid #aeaeae;
          border-radius: 5px;
@@ -59,8 +60,8 @@ body {
 .online-list {
    grid-column: 1 / 12;
    grid-row: 2 / 8;
-
    overflow: auto;
+   background-color: rgb(255, 255, 255);
 
    &::-webkit-scrollbar {
       width: 10px;
@@ -117,9 +118,12 @@ body {
 }
 //-------------------------------------User info-------------------------------------//
 .user-container {
+   background-color: rgb(255, 255, 255);
    grid-column: 12 / 25;
    height: 100%;
    box-shadow: 0 4px 10px -6px rgba(0, 0, 0, 0.433);
+   z-index: 3;
+   
 }
 
 .user {
@@ -128,8 +132,13 @@ body {
    align-items: center;
    height: 100%;
 
+
    &__info {
       display: flex;
+      text-decoration: none;
+      &:hover {
+         opacity: 0.8;
+      }
       &__icon {
          width: 30px;
       }
@@ -140,21 +149,21 @@ body {
          font-size: 1.2rem;
       }
    }
-   &__btn {
-      text-decoration: none;
-      padding: 11px 35px;
-      font-size: 1rem;
-      font-weight: 100;
-      color: #1e458d;
-      border: 1px solid #1e458d;
-      border-radius: 50px;
-      transition: 0.1s ease-in;
+   // &__btn {
+   //    text-decoration: none;
+   //    padding: 11px 35px;
+   //    font-size: 1rem;
+   //    font-weight: 100;
+   //    color: #1e458d;
+   //    border: 1px solid #1e458d;
+   //    border-radius: 50px;
+   //    transition: 0.1s ease-in;
 
-      &:hover {
-         opacity: 0.9;
-         cursor: pointer;
-      }
-   }
+   //    &:hover {
+   //       opacity: 0.9;
+   //       cursor: pointer;
+   //    }
+   // }
 }
 //-------------------------------------Chat history-------------------------------------//
 .chat-history {
@@ -163,6 +172,7 @@ body {
    display: flex;
    flex-direction: column;
    overflow: auto;
+   background-color: rgb(255, 255, 255);
 
    &__left {
       display: flex;
@@ -222,6 +232,8 @@ body {
    align-items: center;
    justify-content: center;
    box-shadow: 0 -4px 10px -6px rgba(0, 0, 0, 0.433);
+   z-index: 2;
+   background-color: rgb(255, 255, 255);
 
    &__form {
       &__input {

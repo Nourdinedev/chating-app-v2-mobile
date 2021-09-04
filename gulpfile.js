@@ -48,6 +48,16 @@ function scssTask3() {
    ); // seting the destination of the compiled css and the map file to a folder called dist
 }
 
+function scssTask4() {
+   return (
+      src("public/scss/profile/style.scss", { sourcemaps: true }) // selecting the style/main scss file || { sourcemaps: true } will generate a .css.map file (show which scss file  the styles are coming from)
+         .pipe(sass()) // running sass function to compile scss to css
+         .pipe(postcss([autoprefixer(), cssnano()])) // using autoprefixer function will add the browser prefixes to support older browsers || and cssnano function to minify css file
+         // .pipe(rev())
+         .pipe(dest("dist/profile", { sourcemaps: "." }))
+   ); // seting the destination of the compiled css and the map file to a folder called dist
+}
+
 // JavaScript Task
 function jsTask1() {
    return (
@@ -76,6 +86,16 @@ function jsTask3() {
          .pipe(terser()) // using terser function to minify JavaScript file
          // .pipe(rev())
          .pipe(dest("dist/chat", { sourcemaps: "." }))
+   ); // seting the destination of the compiled JavaScript and the map file to a folder called dist
+}
+
+function jsTask4() {
+   return (
+      src("public/js/profile/script.js", { sourcemaps: true }) // selecting the js file || { sourcemaps: true } will generate a .js.map file (show which js file  the scripts are coming from)
+         .pipe(babel({ presets: ["@babel/preset-env"] })) // running babel function to compile JavaScript to older versions so old browsers can run it with no problems
+         .pipe(terser()) // using terser function to minify JavaScript file
+         // .pipe(rev())
+         .pipe(dest("dist/profile", { sourcemaps: "." }))
    ); // seting the destination of the compiled JavaScript and the map file to a folder called dist
 }
 
@@ -109,9 +129,11 @@ function watchTask() {
          scssTask1,
          scssTask2,
          scssTask3,
+         scssTask4,
          jsTask1,
          jsTask2,
          jsTask3,
+         jsTask4,
          browserSyncReload
       )
    );
@@ -123,8 +145,10 @@ exports.default = series(
    scssTask1,
    scssTask2,
    scssTask3,
+   scssTask4,
    jsTask1,
    jsTask2,
    jsTask3,
+   jsTask4,
    watchTask
 );

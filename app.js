@@ -52,12 +52,12 @@ app.get("/register", async (req, res) => {
    // res.send(user);
 });
 
-app.get("/chat", (req, res) => {
+app.get("/:id/chat", (req, res) => {
    // res.render("chat.html"); //using EJS
    res.sendFile(path.join(__dirname, "./views/chat.html"));
 });
 
-app.get("/profile", (req, res) => {
+app.get("/:id/profile", (req, res) => {
    // res.render("chat.html"); //using EJS
    res.sendFile(path.join(__dirname, "./views/profile.html"));
 });
