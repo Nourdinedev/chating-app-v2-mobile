@@ -1,6 +1,7 @@
 // require express
 const express = require("express");
 const app = express();
+const expressLayouts = require('express-ejs-layouts');
 
 // require path
 const path = require("path");
@@ -33,33 +34,46 @@ db.once("open", () => {
    console.log("Database connected");
 });
 
-// app.set("views", __dirname + "/views"); //for using EJS
-// app.engine("html", require("ejs").renderFile); //for using EJS
-// app.set("view engine", "ejs"); //for using EJS
+
+app.set("views", __dirname + "/views"); //for using EJS
+app.set("view engine", "ejs"); //for using EJS
+app.use(expressLayouts);
+
+
+app.use(express.urlencoded({ extended: true }))
+
+//Join paths
 app.use(express.static(path.join(__dirname, "dist")));
-app.use(express.static(path.join(__dirname, "seeds")));
 
+//routes
 app.get("/", (req, res) => {
-   // res.render("index.html");  //using EJS
-   res.sendFile(path.join(__dirname, "./views/index.html"));
+   res.render("home");  //using EJS
+
 });
 
-app.get("/register", async (req, res) => {
-   // res.render("register.html"); //using EJS
-   res.sendFile(path.join(__dirname, "./views/register.html"));
-   // const user = new User({ name: "NiiDark" });
-   // await user.save();
-   // res.send(user);
+app.get("/sign", async (req, res) => {
+   res.render("sign"); //using EJS
 });
 
-app.get("/:id/chat", (req, res) => {
-   // res.render("chat.html"); //using EJS
-   res.sendFile(path.join(__dirname, "./views/chat.html"));
+app.post("/sign", async (req, res) => {
+   const user = new User(req.body.user)
+   await user.save();
+   res.redirect(`sign/${user._id}`)
 });
 
-app.get("/:id/profile", (req, res) => {
-   // res.render("chat.html"); //using EJS
-   res.sendFile(path.join(__dirname, "./views/profile.html"));
+app.get("/sign/:id", async (req, res) => {
+   const user = await User.findById(req.params.id)
+   res.render("chat", { user }); //using EJS
+});
+
+app.get("/profile/:id", async (req, res) => {
+   const user = await User.findById(req.params.id)
+   res.render("profile", { user }); //using EJS
+});
+
+
+app.get("/*", (req, res) => {
+   res.render("404"); //using EJS
 });
 
 const PORT = 3000 || process.env.PORT;

@@ -1,11 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500&display=swap');
 
 body {
-   font-family: "Noto Sans JP";
-   margin: 0;
-   padding: 0;
-   background: linear-gradient(90deg, #2b357d, #697ec1);
+    font-family: "Noto Sans JP", sans-serif;
+    background: radial-gradient(at 50% -20%, #908392, #0d060e) fixed;
 }
+
 //-------------------------------------wrapper-------------------------------------//
 .wrapper {
    display: grid;

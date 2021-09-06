@@ -15,3 +15,6 @@ closeBtn.forEach(function (element, index) {
       card.classList.remove("active");
    });
 });
+
+
+module.exports = { btn, closeBtn }

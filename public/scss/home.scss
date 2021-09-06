@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500&display=swap');
 
 :root {
    --primary-color: #3a4052;
@@ -6,14 +6,15 @@
 
 * {
    box-sizing: border-box;
+   font-weight: 300;
    margin: 0;
    padding: 0;
 }
 
 body {
-   font-family: "Open Sans", sans-serif;
+   font-family: "Noto Sans JP", sans-serif;
    line-height: 1.5;
-   background: linear-gradient(90deg, #2b357d, #697ec1);
+   background: radial-gradient(at 50% -20%, #908392, #0d060e) fixed;
 }
 
 a {

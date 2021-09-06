@@ -1,16 +1,15 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500&display=swap');
 
 * {
-   box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-   background: #f6f5f7;
    display: flex;
    justify-content: center;
    align-items: center;
    flex-direction: column;
-   font-family: "Montserrat", sans-serif;
+   font-family: "Noto Sans JP", sans-serif;
    height: 100vh;
    margin: -20px 0 50px;
 }
@@ -45,8 +44,8 @@ a {
 
 button {
    border-radius: 20px;
-   background-color: #2b357d;
-   border: 1px solid #697ec1;
+   background-color: #3f3f3f;
+   border: 1px solid #838383;
    color: #ffffff;
    font-size: 12px;
    font-weight: bold;
@@ -54,6 +53,7 @@ button {
    letter-spacing: 1px;
    text-transform: uppercase;
    transition: transform 80ms ease-in;
+   margin-top: 15px;
 }
 
 button:active {
@@ -165,7 +165,7 @@ input {
 
 .overlay {
    background: #ff416c;
-   background: linear-gradient(90deg, #2b357d, #697ec1);
+   background: radial-gradient(at 50% -20%, #908392, #0d060e) fixed;
    background-repeat: no-repeat;
    background-size: cover;
    background-position: 0 0;
