@@ -121,9 +121,9 @@ function browserSyncReload(cb) {
 
 // Watch Task
 function watchTask() {
-   watch("views/*.html", browserSyncReload);
+   watch("views/*.ejs", browserSyncReload);
    watch(
-      ["public/scss/**/**/*.scss", "bublic/**/*.js"],
+      ["public/scss/*.scss", "public/js/*.js"],
       series(
          // clean_up,
          scssTask1,
