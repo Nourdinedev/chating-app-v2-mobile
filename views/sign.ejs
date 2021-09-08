@@ -4,21 +4,64 @@
 <body>
    <div class="container" id="container">
       <div class="form-container sign-up-container">
-         <form action="/sign-in" method="post">
+         <form id="form" action="/sign-in" method="post">
             <h1>Create Account</h1>
-            <input type="text" placeholder="Name" name="user[name]" required />
-            <input type="email" placeholder="Email" name="user[email]" required />
-            <input type="password" placeholder="Password" name="user[password]" required />
+            <div class="form-control">
+               <input id="name" type="text" placeholder="Name" name="user[name]" />
+               <i class="fas fa-check-circle"></i>
+               <i class="fas fa-exclamation-circle"></i>
+               <small>Error message</small>
+            </div>
+            <div class="form-control">
+               <input id="email" type="text" placeholder="Email" name="user[email]" />
+               <i class="fas fa-check-circle"></i>
+               <i class="fas fa-exclamation-circle"></i>
+               <small>Error message</small>
+            </div>
+            <div class="form-control">
+               <input id="password-sign-up" type="password" placeholder="Password" name="user[password]" />
+               <i class="fas fa-check-circle"></i>
+               <i class="fas fa-exclamation-circle"></i>
+               <small>Error message</small>
+            </div>
+            <div class="password-visibility-sign-up" id="show-password-sign-up">
+               <span>show</span>
+            </div>
+
+            <div class="password-visibility-sign-up hide" id="hide-password-sign-up">
+               <span>hide</span>
+            </div>
+
             <button>Sign Up</button>
          </form>
       </div>
       <div class="form-container sign-in-container">
-         <form action="/sign-up" method="post">
+         <form id="form2" action="/sign-up" method="post">
             <h1>Sign in</h1>
-            <input type="email" placeholder="Email" name="user[email]" required />
-            <input type="password" placeholder="Password" name="user[password]" required />
+            <div class="form-control">
+               <input id="email2" type="text" placeholder="Email" name="user[email]" />
+               <i class="fas fa-check-circle"></i>
+               <i class="fas fa-exclamation-circle"></i>
+               <small>Error message</small>
+            </div>
+            <div class="form-control">
+               <input id="password-sign-in" type="password" placeholder="Password" name="user[password]" />
+               <i class="fas fa-check-circle"></i>
+               <i class="fas fa-exclamation-circle"></i>
+               <small>Error message</small>
+            </div>
+
+            <div class="password-visibility-sign-in" id="show-password-sign-in">
+               <span>show</span>
+            </div>
+
+            <div class="password-visibility-sign-in hide" id="hide-password-sign-in">
+               <span>hide</span>
+            </div>
             <a href="#">Forgot your password?</a>
+
             <button>Sign In</button>
+
          </form>
       </div>
       <div class="overlay-container">

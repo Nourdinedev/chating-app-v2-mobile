@@ -85,12 +85,15 @@ form {
 }
 
 input {
+   box-sizing: border-box;
    background-color: #eee;
    border: none;
-   padding: 12px 15px;
-   margin: 8px 0;
+   padding: 12px 27px;
+   margin: 15px 0;
    width: 100%;
+   height: 39px;
 }
+
 
 .container {
    background-color: #fff;
@@ -164,8 +167,8 @@ input {
 }
 
 .overlay {
-   background: #ff416c;
-   background: radial-gradient(at 50% -20%, #908392, #0d060e) fixed;
+   background: rgb(34,115,195);
+   background: linear-gradient(0deg, rgba(34,115,195,1) 0%, rgba(253,45,173,1) 100%);
    background-repeat: no-repeat;
    background-size: cover;
    background-position: 0 0;
@@ -253,3 +256,70 @@ footer a {
    color: #3c97bf;
    text-decoration: none;
 }
+
+.password-visibility-sign-up{
+   position: absolute;
+   top: 312px;
+   left: 285px;
+   background-color: rgb(202, 202, 202);
+   height: 30px;
+   width: 45px;
+   border-radius: 5px;
+   &:hover{
+      opacity: 0.9;
+      cursor: pointer;
+   }
+}
+
+.password-visibility-sign-in{
+   position: absolute;
+   top: 253.5px;
+   left: 285px;
+   background-color: rgb(202, 202, 202);
+   height: 30px;
+   width: 45px;
+   border-radius: 5px;
+   &:hover{
+      opacity: 0.9;
+      cursor: pointer;
+   }
+}
+
+
+.hide{
+   visibility: hidden;
+}
+
+.form-control{
+   position: relative;
+   width: 100%;
+}
+
+.form-control.error input {
+	border: solid 3px #e74d3cd5;
+}
+
+.form-control i {
+	visibility: hidden;
+	position: absolute;
+	top: 27px;
+	right: 262px;
+}
+
+.form-control.error i.fa-exclamation-circle {
+	color: #e74c3c;
+	visibility: visible;
+}
+
+.form-control small {
+	color: #e74c3c;
+	position: absolute;
+	bottom: -4px;
+	left: 0;
+	visibility: hidden;
+}
+
+.form-control.error small {
+	visibility: visible;
+}
+
