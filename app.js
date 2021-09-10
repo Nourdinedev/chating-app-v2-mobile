@@ -20,6 +20,10 @@ const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/chat-app";
 const catchAsync = require("./utils/catchAsync")
 const ExpressError = require("./utils/ExpressError")
 
+// Joi valedation
+const UserValidation = require("./schemas")
+
+
 //require method override
 const methodOverride = require("method-override")
 
@@ -63,8 +67,9 @@ app.get("/sign", catchAsync(async (req, res) => {
    res.render("sign", { title: "sign in | sign up" }); //using EJS
 }));
 
-app.post("/sign-up", catchAsync(async (req, res) => {
-   if (!req.body.user) throw new ExpressError("Invalid user data", 400)
+app.post("/sign-up", UserValidation, catchAsync(async (req, res) => {
+   // if (!req.body.user) throw new ExpressError("Invalid user data", 400)
+
    const user = new User(req.body.user)
    await user.save();
    res.redirect(`user/${user._id}`)
@@ -82,7 +87,6 @@ app.get("/user/:id", catchAsync(async (req, res, next) => {
    const user = await User.findById(req.params.id,)
    if (!user) throw new ExpressError("User not found", 404)
    res.render("chat", { user, title: `${user.name} | Chat Rooms` });
-   if (error) throw new ExpressError("User not found", 404)
 }));
 
 app.get("/profile/:id", catchAsync(async (req, res) => {
@@ -100,12 +104,13 @@ app.put("/profile/:id", catchAsync(async (req, res) => {
 }));
 
 app.all("/*", (req, res, next) => {
-   res.render("error", { title: "Oops | Page not found 404" }); //using EJS
+   throw new ExpressError("Page Not Found", 404)
 });
 
 app.use((err, req, res, next) => {
-   const { statusCode = 500, message = "Somthing went wrong" } = err;
-   res.status(statusCode).send(message)
+   const { statusCode = 500 } = err;
+   if (!err.message) err.message = "Oops, Somthing went wrong";
+   res.status(statusCode).render("error", { err, title: "Oops | Somthing went wrong" })
    // return res.render("404", { title: "Page not found 404" });
 })
 
