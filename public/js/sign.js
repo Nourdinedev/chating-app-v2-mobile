@@ -1,3 +1,16 @@
+
+//Scroll Down effect
+const Scrollbtn = document.getElementById("scrollDown-btn")
+Scrollbtn.addEventListener("click", () => {
+   window.scrollBy({
+      top: 1000,
+      left: 0,
+      behavior: "smooth"
+   })
+   // 
+   // console.log("clicked")
+})
+
 //sign-in and sign-up switch
 const signUpButton = document.getElementById("signUp");
 const signInButton = document.getElementById("signIn");
