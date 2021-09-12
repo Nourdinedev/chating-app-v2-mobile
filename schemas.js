@@ -5,8 +5,7 @@ const UserValidation = (req, res, next) => {
     const Userschema = Joi.object({
         user: Joi.object({
             name: Joi.string()
-                .alphanum()
-                .min(3)
+                .min(5)
                 .max(30)
                 .required(),
 

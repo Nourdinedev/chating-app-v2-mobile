@@ -63,10 +63,6 @@ app.get("/", (req, res) => {
 
 });
 
-app.get("/sign", catchAsync(async (req, res) => {
-   res.render("sign", { title: "sign in | sign up" }); //using EJS
-}));
-
 app.post("/sign-up", UserValidation, catchAsync(async (req, res) => {
    // if (!req.body.user) throw new ExpressError("Invalid user data", 400)
 
@@ -89,7 +85,7 @@ app.get("/user/:id", catchAsync(async (req, res, next) => {
    res.render("chat", { user, title: `${user.name} | Chat Rooms` });
 }));
 
-app.get("/profile/:id", catchAsync(async (req, res) => {
+app.get("/user/:id/profile", catchAsync(async (req, res) => {
    const user = await User.findById(req.params.id,)
    res.render("profile", { user, title: `${user.name} | Profile` }); //using EJS
    // if (!user) {
@@ -97,7 +93,7 @@ app.get("/profile/:id", catchAsync(async (req, res) => {
    // }
 }));
 
-app.put("/profile/:id", catchAsync(async (req, res) => {
+app.put("/user/:id/profile", catchAsync(async (req, res) => {
    const { id } = req.params
    const user = await User.findByIdAndUpdate(id, { ...req.body.user })
    res.redirect(`profile/${user._id}`)

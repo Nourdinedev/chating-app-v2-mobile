@@ -18,7 +18,7 @@
                     <p id="location">Mrirt, Morocco</p>
                 </div>
                 <div class="card__info__edit">
-                    <form action="/profile/<%= user._id %>?_method=put" method="post">
+                    <form action="/user/<%= user._id %>/profile?_method=put" method="post">
                         <input class="input" type="text" name="user[name]" value="<%= user.name %>" required>
                         <input class="input" type="text" name="user[photo]" value="<%= user.photo %>"
                             placeholder="image URL">
