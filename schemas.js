@@ -1,6 +1,8 @@
 const Joi = require('joi');
 const ExpressError = require('./utils/ExpressError');
 
+
+// server side validation for the user model
 const UserValidation = (req, res, next) => {
     const Userschema = Joi.object({
         user: Joi.object({
@@ -20,7 +22,7 @@ const UserValidation = (req, res, next) => {
     })
     const { error } = Userschema.validate(req.body);
     if (error) {
-        const msg = error.details.map(el => el.message).join(",")
+        const msg = error.details.map(el => el.message).join(",") //"he user information are not valid" //Use on production
         throw new ExpressError(msg, 400)
     } else {
         next()

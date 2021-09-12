@@ -1,10 +1,18 @@
 // require express
 const express = require("express");
 const app = express();
+
+//require expressLeyouts for EJS
 const expressLayouts = require('express-ejs-layouts');
 
+//require session
+const session = require("express-session")
+
+//require flash
+const flash = require("connect-flash")
+
 // require path
-const path = require("path");
+// const path = require("path");
 
 // set up socket
 const http = require("http");
@@ -16,19 +24,12 @@ const io = socketio(server);
 const mongoose = require("mongoose");
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/chat-app";
 
-//require Utils
-const catchAsync = require("./utils/catchAsync")
-const ExpressError = require("./utils/ExpressError")
-
-// Joi valedation
-const UserValidation = require("./schemas")
-
-
 //require method override
 const methodOverride = require("method-override")
 
-//require models
-const User = require("./models/user");
+//require routes
+const user = require("./routes/user")
+const home = require("./routes/home")
 
 // connect to DB
 mongoose.connect(dbUrl, {
@@ -45,64 +46,49 @@ db.once("open", () => {
    console.log("Database connected");
 });
 
-
-app.set("views", __dirname + "/views"); //for using EJS
-app.set("view engine", "ejs"); //for using EJS
+//EJS setup
+app.set("views", __dirname + "/views"); //app.set("views", path.join(__dirname, "/views")); this does the same job (require path)
+app.set("view engine", "ejs");
 app.use(expressLayouts);
 
-
+//use urlencoded
 app.use(express.urlencoded({ extended: true }))
+
+//use methodOverride
 app.use(methodOverride("_method"))
 
 //Join paths
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static("dist")); // app.use(express.static(path.join(__dirname, "dist"))); this does the same job (require path)
 
-//routes
-app.get("/", (req, res) => {
-   res.render("home", { title: "Chat Rooms" });  //using EJS
+//use session
+const sessionConfig = {
+   secret: "sessionsecrit", //solve deprecated warnings
+   resave: false, //solve deprecated warnings
+   saveUninitialized: true, //solve deprecated warnings
+   cookie: {
+      httpOnly: true,
+      expires: Date.now() + 1000 * 60 * 60 * 24 * 7, //set expiration date
+      maxAge: 1000 * 60 * 60 * 24 * 7,//set max age
 
-});
-
-app.post("/sign-up", UserValidation, catchAsync(async (req, res) => {
-   // if (!req.body.user) throw new ExpressError("Invalid user data", 400)
-
-   const user = new User(req.body.user)
-   await user.save();
-   res.redirect(`user/${user._id}`)
-}));
-
-app.post("/sign-in", catchAsync(async (req, res) => {
-   const user = await User.findOne({ email: req.body.user.email })
-   if (req.body.user.password !== user.password) {
-      return res.redirect("/sign")
    }
-   res.redirect(`user/${user._id}`)
-}));
+}
+app.use(session(sessionConfig))
 
-app.get("/user/:id", catchAsync(async (req, res, next) => {
-   const user = await User.findById(req.params.id,)
-   if (!user) throw new ExpressError("User not found", 404)
-   res.render("chat", { user, title: `${user.name} | Chat Rooms` });
-}));
+//use flash
+app.use(flash())
 
-app.get("/user/:id/profile", catchAsync(async (req, res) => {
-   const user = await User.findById(req.params.id,)
-   res.render("profile", { user, title: `${user.name} | Profile` }); //using EJS
-   // if (!user) {
-   //    return res.render("404", { title: "Page not found 404" });
-   // }
-}));
+app.use((req, res, next) => {
+   res.locals.success = req.flash("success")
+   res.locals.error = req.flash("error")
+   next()
+})
 
-app.put("/user/:id/profile", catchAsync(async (req, res) => {
-   const { id } = req.params
-   const user = await User.findByIdAndUpdate(id, { ...req.body.user })
-   res.redirect(`profile/${user._id}`)
-}));
+//use router
+app.use("/user", user)
+app.use(home)
 
-app.all("/*", (req, res, next) => {
-   throw new ExpressError("Page Not Found", 404)
-});
 
+//error handling
 app.use((err, req, res, next) => {
    const { statusCode = 500 } = err;
    if (!err.message) err.message = "Oops, Somthing went wrong";
@@ -110,6 +96,7 @@ app.use((err, req, res, next) => {
    // return res.render("404", { title: "Page not found 404" });
 })
 
+//express server
 const PORT = 3000 || process.env.PORT;
 
 server.listen(PORT, () => console.log(`Server running in ${process.env.NODE_ENV} on port: ${PORT}`));

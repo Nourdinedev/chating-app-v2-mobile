@@ -55,15 +55,15 @@ function scssTask4() {
    ); // seting the destination of the compiled css and the map file to a folder called dist
 }
 
-// function scssTask5() {
-//    return (
-//       src("public/scss/sign.scss", { sourcemaps: true }) // selecting the style/main scss file || { sourcemaps: true } will generate a .css.map file (show which scss file  the styles are coming from)
-//          .pipe(sass()) // running sass function to compile scss to css
-//          .pipe(postcss([autoprefixer(), cssnano()])) // using autoprefixer function will add the browser prefixes to support older browsers || and cssnano function to minify css file
-//          // .pipe(rev())
-//          .pipe(dest("dist/CSS", { sourcemaps: "." }))
-//    ); // seting the destination of the compiled css and the map file to a folder called dist
-// }
+function scssTask5() {
+   return (
+      src("public/scss/flash.scss", { sourcemaps: true }) // selecting the style/main scss file || { sourcemaps: true } will generate a .css.map file (show which scss file  the styles are coming from)
+         .pipe(sass()) // running sass function to compile scss to css
+         .pipe(postcss([autoprefixer(), cssnano()])) // using autoprefixer function will add the browser prefixes to support older browsers || and cssnano function to minify css file
+         // .pipe(rev())
+         .pipe(dest("dist/CSS", { sourcemaps: "." }))
+   ); // seting the destination of the compiled css and the map file to a folder called dist
+}
 
 // JavaScript Task
 function jsTask1() {
@@ -86,6 +86,15 @@ function jsTask2() {
    ); // seting the destination of the compiled JavaScript and the map file to a folder called dist
 }
 
+function jsTask3() {
+   return (
+      src("public/js/flash.js", { sourcemaps: true }) // selecting the js file || { sourcemaps: true } will generate a .js.map file (show which js file  the scripts are coming from)
+         .pipe(babel({ presets: ["@babel/preset-env"] })) // running babel function to compile JavaScript to older versions so old browsers can run it with no problems
+         .pipe(terser()) // using terser function to minify JavaScript file
+         // .pipe(rev())
+         .pipe(dest("dist/js", { sourcemaps: "." }))
+   ); // seting the destination of the compiled JavaScript and the map file to a folder called dist
+}
 
 // Browsersync
 // function browserSyncServe(cb) {
@@ -118,8 +127,10 @@ function watchTask() {
          scssTask2,
          scssTask3,
          scssTask4,
+         scssTask5,
          jsTask1,
          jsTask2,
+         jsTask3,
          browserSyncReload
       )
    );
@@ -132,7 +143,9 @@ exports.default = series(
    scssTask2,
    scssTask3,
    scssTask4,
+   scssTask5,
    jsTask1,
    jsTask2,
+   jsTask3,
    watchTask
 );

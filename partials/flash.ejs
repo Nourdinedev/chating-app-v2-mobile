@@ -1,0 +1,22 @@
+<% if(success.length){ %>
+    <div class="alert" id="success" role="alert">
+        <div class="messge-wrapper">
+            <i class="fas fa-check-circle state-icon" id="state-icon"></i>
+            <p class="error-message">
+                <%= success %>
+            </p>
+        </div>
+        <i class="fas fa-times x" id="X1"></i>
+    </div>
+    <% } %>
+
+        <% if(error.length){ %>
+            <div class="alert" id="error" role="alert">
+                <div class="messge-wrapper">
+                    <i class="fas fa-times-circle state-icon" id="state-icon"></i>
+                    <p class="error-message">
+                        <%= error %>
+                    </p>
+                </div><i class="fas fa-times x" id="X2"></i>
+            </div>
+            <% } %>

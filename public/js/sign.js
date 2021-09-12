@@ -25,6 +25,7 @@ signInButton.addEventListener("click", () => {
 });
 
 //show and hide password
+//for sign up form
 const showPassSignUp = document.getElementById("show-password-sign-up")
 const hidePassSignUp = document.getElementById("hide-password-sign-up")
 
@@ -42,6 +43,7 @@ hidePassSignUp.addEventListener("click", () => {
    showPassSignUp.classList.remove("hide")
 })
 
+//for sign in form
 const showPassSignIn = document.getElementById("show-password-sign-in")
 const hidePassSignIn = document.getElementById("hide-password-sign-in")
 

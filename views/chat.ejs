@@ -4,9 +4,14 @@
 <body>
    <div class="wrapper">
       <div class="one">
-         <img class="self-user-img"
-            src="https://d5nunyagcicgy.cloudfront.net/external_assets/hero_examples/hair_beach_v391182663/original.jpeg"
-            alt="<%= user.name %> image">
+         <div class="self">
+            <img class="self__user-img"
+               src="https://d5nunyagcicgy.cloudfront.net/external_assets/hero_examples/hair_beach_v391182663/original.jpeg"
+               alt="<%= user.name %> image">
+            <div class="self__user-name">
+               <%= user.name %>
+            </div>
+         </div>
          <div class="online-state">
             <div class="state-text">Online</div>
          </div>
@@ -25,61 +30,20 @@
          </div>
       </div>
       <div class="four">
-         <div class="user-container">
-            <dir class="user-img">
-               <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg" alt="<%= user.name %> image">
-               <div class="online-state"></div>
-            </dir>
-            <div class="user-wrapper">
-               <h4 class="user-name">Jhon Doe</h4>
-               <h5 class="last-message">Hi Danna how are you Do...</h5>
-               <div class="unread-messages"><span>3</span></div>
+         <% for(let i=0; i<20; i++){ %>
+            <div class="user-container">
+               <dir class="user-img">
+                  <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"
+                     alt="<%= user.name %> image">
+                  <div class="online-state"></div>
+               </dir>
+               <div class="user-wrapper">
+                  <h4 class="user-name">Jhon Doe</h4>
+                  <h5 class="last-message">Hi Danna how are you Do...</h5>
+                  <div class="unread-messages"><span>3</span></div>
+               </div>
             </div>
-         </div>
-         <div class="user-container">
-            <dir class="user-img">
-               <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg" alt="<%= user.name %> image">
-               <div class="online-state"></div>
-            </dir>
-            <div class="user-wrapper">
-               <h4 class="user-name">Jhon Doe</h4>
-               <h5 class="last-message">Hi Danna how are you Do...</h5>
-               <div class="unread-messages"><span>3</span></div>
-            </div>
-         </div>
-         <div class="user-container">
-            <dir class="user-img">
-               <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg" alt="<%= user.name %> image">
-               <div class="online-state"></div>
-            </dir>
-            <div class="user-wrapper">
-               <h4 class="user-name">Jhon Doe</h4>
-               <h5 class="last-message">Hi Danna how are you Do...</h5>
-               <div class="unread-messages"><span>4</span></div>
-            </div>
-         </div>
-         <div class="user-container">
-            <dir class="user-img">
-               <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg" alt="<%= user.name %> image">
-               <div class="online-state"></div>
-            </dir>
-            <div class="user-wrapper">
-               <h4 class="user-name">Jhon Doe</h4>
-               <h5 class="last-message">Hi Danna how are you Do...</h5>
-               <div class="unread-messages"><span>2</span></div>
-            </div>
-         </div>
-         <div class="user-container">
-            <dir class="user-img">
-               <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg" alt="<%= user.name %> image">
-               <div class="online-state"></div>
-            </dir>
-            <div class="user-wrapper">
-               <h4 class="user-name">Jhon Doe</h4>
-               <h5 class="last-message">Hi Danna how are you Do...</h5>
-               <div class="unread-messages"><span>3</span></div>
-            </div>
-         </div>
+            <% } %>
       </div>
       <div class="five">
          <span class="user-name">Jhon Doe</span>
