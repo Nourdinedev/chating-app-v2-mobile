@@ -22,10 +22,17 @@ const io = socketio(server);
 
 // require mongoose
 const mongoose = require("mongoose");
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/chat-app";
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/chat-rooms";
 
 //require method override
 const methodOverride = require("method-override")
+
+//require passport and passport-local
+const passport = require("passport")
+const LocalStrategy = require("passport-local")
+
+//require user model
+const User = require("./models/user")
 
 //require routes
 const user = require("./routes/user")
@@ -80,8 +87,22 @@ app.use(flash())
 app.use((req, res, next) => {
    res.locals.success = req.flash("success")
    res.locals.error = req.flash("error")
+   res.locals.sign_in_error = req.flash("sign_in_error")
+   res.locals.sign_up_error = req.flash("sign_up_error")
    next()
 })
+
+//use passport
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy({
+   usernameField: 'email', //can be 'email' or 'whateveryouwant'
+   passwordField: 'password' //same thing here the defult is password //--- so in this case it is not required ---//
+}, User.authenticate()));
+
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser())
 
 //use router
 app.use("/user", user)

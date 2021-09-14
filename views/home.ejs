@@ -4,22 +4,12 @@
 </head>
 
 <body>
-   <section class="showcase" id="showcase">
-
-      <div class="content">
-         <h1>Welcom To Chat Rooms</h1>
-         <h3>Enter a room and start chatting with random people</h3>
-         <a class="btn" id="scrollDown-btn">Start Chating</a>
-      </div>
-
-   </section>
-
    <section class="wrapper">
-      <%- include("../partials/flash") %>
-         <div class="container" id="container">
-            <div class="form-container sign-up-container">
-               <form id="form" action="/user/sign-up" method="post">
-                  <h1>Create Account</h1>
+      <div class="container" id="container">
+         <div class="form-container sign-up-container">
+            <form id="form" action="/user/sign-up" method="POST">
+               <h1>Create Account</h1>
+               <%- include("../partials/signup") %>
                   <div class="form-control">
                      <input id="name" type="text" placeholder="Name" name="user[name]" />
                      <i class="fas fa-check-circle"></i>
@@ -47,52 +37,54 @@
                   </div>
 
                   <button>Sign Up</button>
-               </form>
-            </div>
-            <div class="form-container sign-in-container">
-               <form id="form2" action="/user/sign-in" method="post">
-                  <h1>Sign in</h1>
-                  <div class="form-control">
-                     <input id="email2" type="text" placeholder="Email" name="user[email]" />
-                     <i class="fas fa-check-circle"></i>
-                     <i class="fas fa-exclamation-circle"></i>
-                     <small>Error message</small>
-                  </div>
-                  <div class="form-control">
-                     <input id="password-sign-in" type="password" placeholder="Password" name="user[password]" />
-                     <i class="fas fa-check-circle"></i>
-                     <i class="fas fa-exclamation-circle"></i>
-                     <small>Error message</small>
-                  </div>
+            </form>
+         </div>
+         <div class="form-container sign-in-container">
+            <form id="form2" action="/user/sign-in" method="POST">
+               <h1>Sign in</h1>
+               <%- include("../partials/signin") %>
+                  <%- include("../partials/general") %>
+                     <div class="form-control">
+                        <input id="email2" type="text" placeholder="Email" name="email" />
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                     </div>
+                     <div class="form-control">
+                        <input id="password-sign-in" type="password" placeholder="Password" name="password" />
+                        <i class="fas fa-check-circle"></i>
+                        <i class="fas fa-exclamation-circle"></i>
+                        <small>Error message</small>
+                     </div>
 
-                  <div class="password-visibility-sign-in" id="show-password-sign-in">
-                     <span>show</span>
-                  </div>
+                     <div class="password-visibility-sign-in" id="show-password-sign-in">
+                        <span>show</span>
+                     </div>
 
-                  <div class="password-visibility-sign-in hide" id="hide-password-sign-in">
-                     <span>hide</span>
-                  </div>
-                  <a href="#">Forgot your password?</a>
+                     <div class="password-visibility-sign-in hide" id="hide-password-sign-in">
+                        <span>hide</span>
+                     </div>
+                     <a href="#">Forgot your password?</a>
 
-                  <button>Sign In</button>
+                     <button>Sign In</button>
 
-               </form>
-            </div>
-            <div class="overlay-container">
-               <div class="overlay">
-                  <div class="overlay-panel overlay-left">
-                     <h1>Welcome Back!</h1>
-                     <p>Please login with your personal info and start chating</p>
-                     <button class="ghost" id="signIn">Sign In</button>
-                  </div>
-                  <div class="overlay-panel overlay-right">
-                     <h1>Hello, Friend!</h1>
-                     <p>Enter your personal details to start chating</p>
-                     <button class="ghost" id="signUp">Sign Up</button>
-                  </div>
+            </form>
+         </div>
+         <div class="overlay-container">
+            <div class="overlay">
+               <div class="overlay-panel overlay-left">
+                  <h1>Welcome Back!</h1>
+                  <p>Please login with your personal info and start chating</p>
+                  <button class="ghost" id="signIn">Sign In</button>
+               </div>
+               <div class="overlay-panel overlay-right">
+                  <h1>Hello, Friend!</h1>
+                  <p>Enter your personal details to start chating</p>
+                  <button class="ghost" id="signUp">Sign Up</button>
                </div>
             </div>
          </div>
+      </div>
    </section>
 
    <script src="/js/sign.js"></script>
