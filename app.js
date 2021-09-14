@@ -111,12 +111,14 @@ app.use(home)
 
 //error handling
 app.use((err, req, res, next) => {
-   const { statusCode = 500 } = err;
-   if (!err.message) err.message = "Oops, Somthing went wrong";
-   res.status(statusCode).render("error", { err, title: "Oops | Somthing went wrong" })
-   // return res.render("404", { title: "Page not found 404" });
+   if (process.env.NODE_ENV !== "production") {
+      const { statusCode = 500 } = err;
+      if (!err.message) err.message = "Oops, Somthing went wrong";
+      res.status(statusCode).render("error", { err, title: "Oops | Somthing went wrong" })
+   } else {
+      return res.redirect("/")
+   }
 })
-
 //express server
 const PORT = 3000 || process.env.PORT;
 
