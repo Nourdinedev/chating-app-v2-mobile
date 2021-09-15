@@ -22,9 +22,9 @@ router.post("/sign-in", UserControllers.login, catchAsync(UserControllers.redire
 
 router.get("/", isLoggedIn, catchAsync(UserControllers.renderUser));
 
-router.get("/profile", isLoggedIn, catchAsync(UserControllers.renderUserProfile));
-
-router.put("/profile", isLoggedIn, catchAsync(UserControllers.profileUpdate));
+router.route("/profile")
+    .get(isLoggedIn, catchAsync(UserControllers.renderUserProfile))
+    .put(isLoggedIn, catchAsync(UserControllers.profileUpdate));
 
 router.get("/sign-out", UserControllers.logoutUser);
 
