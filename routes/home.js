@@ -1,26 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const ExpressError = require("../utils/ExpressError");
-const { isLoggedIn } = require("../middleware");
+const { isLoggedOut } = require("../middleware")
 
-
+//require Controllers
+const HomeControllers = require("../controllers/home")
 
 //home routes
-router.get("/", (req, res) => {
-    if (req.user) {
-        return res.redirect(`/user/${req.user._id}`)
-    }
-    res.render("home", { title: "Chat Rooms" });  //using EJS
-
-});
+router.get("/", isLoggedOut, HomeControllers.renderHome);
 
 //404 route
-router.all("/*", (req, res, next) => {
-    if (req.user) {
-        return res.redirect(`/user/${req.user._id}`) //user added to the req object automatically by passport if the user is logged-in
-    }
-    res.redirect("/")
-});
+router.all("/*", isLoggedOut, HomeControllers.redirectHome);
 
 
 module.exports = router

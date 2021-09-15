@@ -10,6 +10,10 @@ const UserSchema = new Schema({
       type: String,
       required: true
    },
+   id: {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+   },
    photo: String,
    country: String,
    city: String,

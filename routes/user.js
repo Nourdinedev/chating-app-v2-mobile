@@ -1,66 +1,32 @@
 const express = require("express");
 const router = express.Router()
 
-//require passport
-const passport = require("passport");
 
-//require models
-const User = require("../models/user");
 
 // Joi valedation
 const UserValidation = require("../schemas")
 
+//require Controllers
+const UserControllers = require("../controllers/user")
+
 //require Utils
 const catchAsync = require("../utils/catchAsync")
-const ExpressError = require("../utils/ExpressError")
 
 //require middlewares
-const { isLoggedIn, isCurrentUser } = require("../middleware")
+const { isLoggedIn } = require("../middleware")
 
 //user routes
-router.post("/sign-up", UserValidation, catchAsync(async (req, res) => {
-    try {
-        const { name, email, password } = req.body.user
-        const user = new User({ name, email })
-        const registerUser = await User.register(user, password);
-        req.login(registerUser, err => {
-            if (err) return next(err)
-            res.redirect(`/user/${user._id}`)
-        })
-    } catch (err) {
-        req.flash("sign_up_error", "A user with the given email is already registered")
-        res.redirect("/")
-    }
-}));
+router.post("/sign-up", UserValidation, catchAsync(UserControllers.registerUser));
 
-router.post("/sign-in", passport.authenticate('local', { failureRedirect: '/', failureFlash: true }), catchAsync(async (req, res) => {
-    res.redirect(`/user/${req.user._id}`)
-}));
+router.post("/sign-in", UserControllers.login, catchAsync(UserControllers.redirectToUser));
 
-router.get("/sign-out", (req, res) => {
-    req.logout()
-    res.redirect("/")
-});
+router.get("/", isLoggedIn, catchAsync(UserControllers.renderUser));
 
+router.get("/profile", isLoggedIn, catchAsync(UserControllers.renderUserProfile));
 
-router.get("/:id", isLoggedIn, catchAsync(async (req, res, next) => {
-    const user = await User.findById(req.params.id)
-    if (!user) throw new ExpressError("User not found", 404)
-    res.render("chat", { user, title: `${user.name} | Chat Rooms` });
-}));
+router.put("/profile", isLoggedIn, catchAsync(UserControllers.profileUpdate));
 
-router.get("/:id/profile", isLoggedIn, catchAsync(async (req, res) => {
-    const user = await User.findById(req.params.id,)
-    res.render("profile", { user, title: `${user.name} | Profile` }); //using EJS
-}));
-
-router.put("/:id/profile", isLoggedIn, catchAsync(async (req, res) => {
-    const { id } = req.params
-    const user = await User.findByIdAndUpdate(id, { ...req.body.user })
-    res.redirect(`/user/${user._id}/profile`)
-}));
-
-
+router.get("/sign-out", UserControllers.logoutUser);
 
 module.exports = router
 
