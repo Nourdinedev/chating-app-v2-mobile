@@ -306,29 +306,31 @@ input {
 
 .password-visibility-sign-up {
    position: absolute;
-   top: 301.5px;
-   left: 285px;
-   background-color: rgb(202, 202, 202);
-   height: 30px;
-   width: 45px;
+   top: 304.5px;
+   left: 300px;
    border-radius: 5px;
    &:hover {
       opacity: 0.9;
       cursor: pointer;
    }
+   img {
+      width: 25px;
+      opacity: 0.6;
+   }
 }
 
 .password-visibility-sign-in {
    position: absolute;
-   top: 244.5px;
-   left: 285px;
-   background-color: rgb(202, 202, 202);
-   height: 30px;
-   width: 45px;
+   top: 248.5px;
+   left: 300px;
    border-radius: 5px;
    &:hover {
       opacity: 0.9;
       cursor: pointer;
+   }
+   img {
+      width: 25px;
+      opacity: 0.6;
    }
 }
 

@@ -1,3 +1,4 @@
+const { array } = require("joi");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -10,6 +11,12 @@ const UserSchema = new Schema({
       type: String,
       required: true
    },
+   contacts: [
+      {
+         type: Schema.Types.ObjectId,
+         ref: "User",
+      }
+   ]
 });
 
 UserSchema.plugin(passportLocalMongoose, { usernameField: 'email' }); // use email as username
