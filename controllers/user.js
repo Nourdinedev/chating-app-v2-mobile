@@ -16,18 +16,11 @@ module.exports.redirectToUser = async (req, res) => {
     res.redirect(`/user`)
 }
 
-// render user profile
-module.exports.renderUserProfile = async (req, res) => {
-    const user = req.user
-    res.render("profile", { user, title: `${user.name} | Profile` }); //using EJS
-}
-
 // register and login user and redirect to chat page
 module.exports.registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body.user
         const user = new User({ name, email })
-        user.id = user._id;
         const registerUser = await User.register(user, password);
         console.log(user)
         req.login(registerUser, err => {
@@ -39,14 +32,6 @@ module.exports.registerUser = async (req, res) => {
         res.redirect("/")
     }
 }
-
-// updating user profile
-module.exports.profileUpdate = async (req, res) => {
-    const id = req.user._id
-    const user = await User.findByIdAndUpdate(id, { ...req.body.user })
-    res.redirect(`/user/profile`)
-}
-
 
 // logout user
 module.exports.logoutUser = (req, res) => {

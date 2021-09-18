@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router()
 
-
-
 // Joi valedation
 const UserValidation = require("../schemas")
 
@@ -21,10 +19,6 @@ router.post("/sign-up", UserValidation, catchAsync(UserControllers.registerUser)
 router.post("/sign-in", UserControllers.login, catchAsync(UserControllers.redirectToUser));
 
 router.get("/", isLoggedIn, catchAsync(UserControllers.renderUser));
-
-router.route("/profile")
-    .get(isLoggedIn, catchAsync(UserControllers.renderUserProfile))
-    .put(isLoggedIn, catchAsync(UserControllers.profileUpdate));
 
 router.get("/sign-out", UserControllers.logoutUser);
 

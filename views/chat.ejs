@@ -5,17 +5,23 @@
    <div class="wrapper">
       <div class="one">
          <div class="self">
-            <a href="/user/profile">
-               <img class="self__user-img"
+            <div class="self__user-img">
+               <img
                   src="https://d5nunyagcicgy.cloudfront.net/external_assets/hero_examples/hair_beach_v391182663/original.jpeg"
-                  alt="<%= user.name %> image"></a>
+                  alt="<%= user.name %> image">
+               <div class="online-state">
+                  <div class="state-text">Online</div>
+               </div>
+            </div>
             <div class="self__user-name">
                <%= user.name %>
             </div>
+            <div class="self__user-email">
+               <%= user.email %>
+            </div>
          </div>
-         <div class="online-state">
-            <div class="state-text">Online</div>
-         </div>
+
+
       </div>
       <div class="two">
          <a href="/user/sign-out">
@@ -27,10 +33,6 @@
          <input type="text" placeholder="Search">
          <img class="input-icon"
             src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGc+CgkJPHBhdGggZD0iTTIyNS40NzQsMEMxMDEuMTUxLDAsMCwxMDEuMTUxLDAsMjI1LjQ3NGMwLDEyNC4zMywxMDEuMTUxLDIyNS40NzQsMjI1LjQ3NCwyMjUuNDc0ICAgIGMxMjQuMzMsMCwyMjUuNDc0LTEwMS4xNDQsMjI1LjQ3NC0yMjUuNDc0QzQ1MC45NDgsMTAxLjE1MSwzNDkuODA0LDAsMjI1LjQ3NCwweiBNMjI1LjQ3NCw0MDkuMzIzICAgIGMtMTAxLjM3MywwLTE4My44NDgtODIuNDc1LTE4My44NDgtMTgzLjg0OFMxMjQuMTAxLDQxLjYyNiwyMjUuNDc0LDQxLjYyNnMxODMuODQ4LDgyLjQ3NSwxODMuODQ4LDE4My44NDggICAgUzMyNi44NDcsNDA5LjMyMywyMjUuNDc0LDQwOS4zMjN6IiBmaWxsPSIjNjk3NDdlIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+Cgk8L2c+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KCTxnPgoJCTxwYXRoIGQ9Ik01MDUuOTAyLDQ3Ni40NzJMMzg2LjU3NCwzNTcuMTQ0Yy04LjEzMS04LjEzMS0yMS4yOTktOC4xMzEtMjkuNDMsMGMtOC4xMzEsOC4xMjQtOC4xMzEsMjEuMzA2LDAsMjkuNDNsMTE5LjMyOCwxMTkuMzI4ICAgIGM0LjA2NSw0LjA2NSw5LjM4Nyw2LjA5OCwxNC43MTUsNi4wOThjNS4zMjEsMCwxMC42NDktMi4wMzMsMTQuNzE1LTYuMDk4QzUxNC4wMzMsNDk3Ljc3OCw1MTQuMDMzLDQ4NC41OTYsNTA1LjkwMiw0NzYuNDcyeiIgZmlsbD0iIzY5NzQ3ZSIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPgoJPC9nPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjwvZz48L3N2Zz4=" />
-         <div class="add-user">
-            <img
-               src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDQ2OS4zMzMzMyA0NjkuMzMzMzMiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTQzNy4zMzIwMzEgMTkyaC0xNjB2LTE2MGMwLTE3LjY2NDA2Mi0xNC4zMzU5MzctMzItMzItMzJoLTIxLjMzMjAzMWMtMTcuNjY0MDYyIDAtMzIgMTQuMzM1OTM4LTMyIDMydjE2MGgtMTYwYy0xNy42NjQwNjIgMC0zMiAxNC4zMzU5MzgtMzIgMzJ2MjEuMzMyMDMxYzAgMTcuNjY0MDYzIDE0LjMzNTkzOCAzMiAzMiAzMmgxNjB2MTYwYzAgMTcuNjY0MDYzIDE0LjMzNTkzOCAzMiAzMiAzMmgyMS4zMzIwMzFjMTcuNjY0MDYzIDAgMzItMTQuMzM1OTM3IDMyLTMydi0xNjBoMTYwYzE3LjY2NDA2MyAwIDMyLTE0LjMzNTkzNyAzMi0zMnYtMjEuMzMyMDMxYzAtMTcuNjY0MDYyLTE0LjMzNTkzNy0zMi0zMi0zMnptMCAwIiBmaWxsPSIjNWY2YTc0IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PC9nPjwvc3ZnPg==" />
-         </div>
       </div>
       <div class="four">
          <% for(let i=0; i<20; i++){ %>
@@ -42,26 +44,24 @@
                </dir>
                <div class="user-wrapper">
                   <h4 class="user-name">Jhon Doe</h4>
-                  <h5 class="last-message">Hi Danna how are you Do...</h5>
                   <div class="unread-messages"><span>3</span></div>
+                  <h5 class="last-message">Hi Danna how are you Do...</h5>
                </div>
             </div>
             <% } %>
       </div>
       <div class="five">
+         <img class="user-image" src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"
+            alt="<%= user.name %> image">
          <span class="user-name">Jhon Doe</span>
-         <span class="online-state__icon"></span>
-         <span class="online-state__text">Online</span>
+         <span class="online-state"></span>
+         <span class="user-email">somthing@gmail.com</span>
       </div>
       <div class="six">Six</div>
       <div class="seven">
          <form action="">
             <input type="text" placeholder="Type something to send...">
-            <button>
-               <img
-                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGc+CgkJPHBhdGggZD0iTTQ4MS41MDgsMjEwLjMzNkw2OC40MTQsMzguOTI2Yy0xNy40MDMtNy4yMjItMzcuMDY0LTQuMDQ1LTUxLjMwOSw4LjI4N0MyLjg2LDU5LjU0Ny0zLjA5OCw3OC41NTEsMS41NTgsOTYuODA4ICAgIEwzOC4zMjcsMjQxaDE4MC4wMjZjOC4yODQsMCwxNS4wMDEsNi43MTYsMTUuMDAxLDE1LjAwMWMwLDguMjg0LTYuNzE2LDE1LjAwMS0xNS4wMDEsMTUuMDAxSDM4LjMyN0wxLjU1OCw0MTUuMTkzICAgIGMtNC42NTYsMTguMjU4LDEuMzAxLDM3LjI2MiwxNS41NDcsNDkuNTk1YzE0LjI3NCwxMi4zNTcsMzMuOTM3LDE1LjQ5NSw1MS4zMSw4LjI4N2w0MTMuMDk0LTE3MS40MDkgICAgQzUwMC4zMTcsMjkzLjg2Miw1MTIsMjc2LjM2NCw1MTIsMjU2LjAwMUM1MTIsMjM1LjYzOCw1MDAuMzE3LDIxOC4xMzksNDgxLjUwOCwyMTAuMzM2eiIgZmlsbD0iIzU1ZDQ4YiIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPgoJPC9nPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjwvZz48L3N2Zz4=" />
-            </button>
+            <button>SEND</button>
          </form>
       </div>
-      <div class="eight">eight</div>
    </div>

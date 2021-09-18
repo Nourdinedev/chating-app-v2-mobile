@@ -111,7 +111,7 @@ span {
 }
 
 a {
-   color: #333;
+   color: rgb(41, 41, 41);
    font-size: 14px;
    text-decoration: none;
    margin: 15px 0;
@@ -119,8 +119,8 @@ a {
 
 button {
    border-radius: 20px;
-   background-color: #3f3f3f;
-   border: 1px solid #838383;
+   background-color: #363e47;
+   border: 1px solid #ffffff;
    color: #ffffff;
    font-size: 12px;
    font-weight: bold;
@@ -161,13 +161,16 @@ form {
 
 input {
    box-sizing: border-box;
-   background-color: #eee;
+   background-color: rgb(230, 230, 230);
    border: none;
    padding: 12px 27px;
    margin: 12px 0;
    width: 100%;
    height: 39px;
    border-radius: 5px;
+   &:focus {
+      outline-color: rgba(0, 0, 0, 0.5);
+   }
 }
 
 .wrapper {
@@ -176,11 +179,11 @@ input {
    flex-direction: column;
    align-items: center;
    justify-content: center;
-   background-color: rgb(220, 220, 220);
+   background: linear-gradient(0deg, #2273c3, #fd2dad);
 }
 .container {
    margin-top: 20px;
-   background-color: #fff;
+   background-color: #ffffff;
    border-radius: 10px;
    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
    position: relative;
@@ -252,11 +255,7 @@ input {
 
 .overlay {
    background: rgb(34, 115, 195);
-   background: linear-gradient(
-      0deg,
-      rgba(34, 115, 195, 1) 0%,
-      rgba(253, 45, 173, 1) 100%
-   );
+   background: linear-gradient(0deg, #fa2eae, #2672c3);
    background-repeat: no-repeat;
    background-size: cover;
    background-position: 0 0;
@@ -321,7 +320,7 @@ input {
 
 .password-visibility-sign-in {
    position: absolute;
-   top: 245.5px;
+   top: 244.5px;
    left: 285px;
    background-color: rgb(202, 202, 202);
    height: 30px;
@@ -359,7 +358,7 @@ input {
 }
 
 .form-control small {
-   color: #e63b28;
+   color: #f00000;
    position: absolute;
    bottom: -7px;
    font-weight: 400;
