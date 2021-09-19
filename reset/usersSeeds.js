@@ -3,7 +3,7 @@ const { random_names, random_email, random_password } = require("./random");
 // require mongoose
 const mongoose = require("mongoose");
 const User = require("../models/user");
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/chat-rooms";
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/chating";
 
 // connect to DB
 mongoose.connect(dbUrl, {

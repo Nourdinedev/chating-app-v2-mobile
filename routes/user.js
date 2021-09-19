@@ -11,14 +11,16 @@ const UserControllers = require("../controllers/user")
 const catchAsync = require("../utils/catchAsync")
 
 //require middlewares
-const { isLoggedIn } = require("../middleware")
+const { isLoggedIn, toLowercase } = require("../middleware")
 
 //user routes
 router.post("/sign-up", UserValidation, catchAsync(UserControllers.registerUser));
 
-router.post("/sign-in", UserControllers.login, catchAsync(UserControllers.redirectToUser));
+router.post("/sign-in", toLowercase, UserControllers.login, catchAsync(UserControllers.redirectToUser));
 
 router.get("/", isLoggedIn, catchAsync(UserControllers.renderUser));
+
+router.patch("/", toLowercase, UserControllers.addUser)
 
 router.get("/sign-out", UserControllers.logoutUser);
 

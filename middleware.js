@@ -13,6 +13,11 @@ module.exports.isLoggedOut = (req, res, next) => {
 }
 
 
+module.exports.toLowercase = (req, res, next) => {
+    req.body.email = req.body.email.toLowerCase()
+    next()
+}
+
 
 
 

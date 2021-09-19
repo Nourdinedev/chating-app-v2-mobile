@@ -22,7 +22,7 @@ const io = socketio(server);
 
 // require mongoose
 const mongoose = require("mongoose");
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/chat-rooms";
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/chating";
 
 //require method override
 const methodOverride = require("method-override")

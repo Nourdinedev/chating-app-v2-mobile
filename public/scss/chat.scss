@@ -88,6 +88,42 @@ div {
    }
 }
 
+.add-user {
+   grid-area: add_user;
+   position: relative;
+   form {
+      input {
+         padding: 15px 35px;
+         border: none;
+         background-color: rgba(0, 0, 0, 0.15);
+         border-radius: 20px;
+         font-size: 0.9rem;
+         color: rgb(197, 197, 197);
+         &:focus {
+            color: rgb(197, 197, 197);
+            outline: none;
+         }
+      }
+      button {
+         position: absolute;
+         height: 35px;
+         width: 45px;
+         right: 15px;
+         top: 5.5px;
+         font-size: 0.8rem;
+         font-weight: 600;
+         color: #9f9f9f;
+         background-color: rgba(255, 255, 255, 0.15);
+         border: none;
+         border-radius: 20px;
+         &:hover {
+            cursor: pointer;
+            opacity: 0.8;
+         }
+      }
+   }
+}
+
 .two {
    grid-area: edit_logout;
    background-color: #303841;
@@ -361,7 +397,7 @@ div {
       "user_image user_image friends friends friends chat_history chat_history chat_history chat_history chat_history chat_history"
       "user_image user_image  friends friends friends chat_history chat_history chat_history chat_history chat_history chat_history"
       ". . friends friends friends chat_history chat_history chat_history chat_history chat_history chat_history"
-      ". . friends friends friends chat_history chat_history chat_history chat_history chat_history chat_history"
+      "add_user add_user friends friends friends chat_history chat_history chat_history chat_history chat_history chat_history"
       ". . friends friends friends chat_history chat_history chat_history chat_history chat_history chat_history"
       ". . friends friends friends chat_history chat_history chat_history chat_history chat_history chat_history"
       ". . friends friends friends chat_history chat_history chat_history chat_history chat_history chat_history"
