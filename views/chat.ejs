@@ -43,28 +43,36 @@
       </div>
 
       <div class="four">
-         <% for(let i=0; i<20; i++){ %>
-            <div class="user-container">
-               <dir class="user-img">
-                  <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"
-                     alt="<%= user.name %> image">
-                  <div class="online-state"></div>
-               </dir>
-               <div class="user-wrapper">
-                  <h4 class="user-name">Jhon Doe</h4>
-                  <div class="unread-messages"><span>3</span></div>
-                  <h5 class="last-message">Hi Danna how are you Do...</h5>
+         <% contacts.forEach(contact=> {%>
+            <a href="/user/<%= contact._id %>">
+               <div class="user-container">
+                  <dir class="user-img">
+                     <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"
+                        alt="<%= contact.name %> image">
+                     <div class="online-state"></div>
+                  </dir>
+                  <div class="user-wrapper">
+                     <h4 class="user-name">
+                        <%= contact.name %>
+                     </h4>
+                     <div class="unread-messages"><span>3</span></div>
+                     <h5 class="last-message">Hi Danna how are you Do...</h5>
+                  </div>
                </div>
-            </div>
-            <% } %>
+            </a>
+            <% }) %>
       </div>
 
       <div class="five">
          <img class="user-image" src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"
-            alt="<%= user.name %> image">
-         <span class="user-name">Jhon Doe</span>
+            alt="<%=ConversationContact.name %> image">
+         <span class="user-name">
+            <%=ConversationContact.name %>
+         </span>
          <span class="online-state"></span>
-         <span class="user-email">somthing@gmail.com</span>
+         <span class="user-email">
+            <%= ConversationContact.email %>
+         </span>
       </div>
 
       <div class="six">Six</div>

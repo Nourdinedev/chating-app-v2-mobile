@@ -18,11 +18,13 @@ router.post("/sign-up", UserValidation, catchAsync(UserControllers.registerUser)
 
 router.post("/sign-in", toLowercase, UserControllers.login, catchAsync(UserControllers.redirectToUser));
 
+router.get("/sign-out", UserControllers.logoutUser);
+
 router.get("/", isLoggedIn, catchAsync(UserControllers.renderUser));
 
-router.patch("/", toLowercase, UserControllers.addUser)
+router.patch("/", toLowercase, catchAsync(UserControllers.addUser))
 
-router.get("/sign-out", UserControllers.logoutUser);
+router.get("/:id", isLoggedIn, catchAsync(UserControllers.renderConversation));
 
 module.exports = router
 
