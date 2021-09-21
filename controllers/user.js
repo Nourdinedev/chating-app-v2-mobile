@@ -76,7 +76,7 @@ module.exports.addUser = async (req, res) => {
         req.flash("add_user_error", "User is already Added to your contacts");
         return res.redirect("/")
     }
-    const addUser = await User.findByIdAndUpdate(req.user._id, { $push: { contacts: contactUser } });
+    const addUser = await User.findByIdAndUpdate(req.user._id, { $push: { contacts: contact } });
     req.flash("add_user_error", `${contact.name} added to your contacts`);
     console.log(addUser);
     res.redirect("/")
