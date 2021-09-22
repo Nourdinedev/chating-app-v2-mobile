@@ -43,8 +43,8 @@
       </div>
 
       <div class="four">
-         <% contacts.forEach(contact=> {%>
-            <a href="/user/<%= contact._id %>">
+         <% user.contacts.forEach(contact=> {%>
+            <a href="/user/<%= contact.id %>">
                <div class="user-container">
                   <dir class="user-img">
                      <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"
@@ -78,8 +78,8 @@
       <div class="six">Six</div>
 
       <div class="seven">
-         <form action="">
-            <input type="text" placeholder="Type something to send...">
+         <form action="/user/<%= ConversationContact._id %>" method="POST">
+            <input type="text" placeholder="Type something to send..." name="message">
             <button>SEND</button>
          </form>
       </div>

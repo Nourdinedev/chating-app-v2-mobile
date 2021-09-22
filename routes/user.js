@@ -24,7 +24,9 @@ router.get("/", isLoggedIn, catchAsync(UserControllers.renderUser));
 
 router.patch("/", toLowercase, catchAsync(UserControllers.addUser))
 
-router.get("/:id", isLoggedIn, catchAsync(UserControllers.renderConversation));
+router.route("/:id")
+    .get(isLoggedIn, catchAsync(UserControllers.renderConversation))
+    .post(isLoggedIn, catchAsync(UserControllers.sendMessage));
 
 module.exports = router
 

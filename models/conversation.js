@@ -5,9 +5,7 @@ const Schema = mongoose.Schema;
 const ConversationSchema = new Schema({
     participants: [
         {
-            type: Schema.Types.ObjectId,
-            ref: "User",
-            required: true,
+            type: String,
         }
     ],
     messages: [
@@ -15,7 +13,6 @@ const ConversationSchema = new Schema({
             author: {
                 type: Schema.Types.ObjectId,
                 ref: "User",
-                required: true,
             },
             body: {
                 type: String,

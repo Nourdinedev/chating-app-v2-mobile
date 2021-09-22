@@ -11,10 +11,21 @@ const UserSchema = new Schema({
       type: String,
       required: true
    },
+   photo: {
+      type: String,
+   },
    contacts: [
       {
-         type: Schema.Types.ObjectId,
-         ref: "User",
+         _id: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+         },
+         name: {
+            type: String
+         },
+         email: {
+            type: String
+         }
       }
    ]
 });
