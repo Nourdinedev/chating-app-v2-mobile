@@ -1,4 +1,3 @@
-const { random_names, random_email, random_password } = require("./random");
 
 // require mongoose
 const mongoose = require("mongoose");
@@ -52,5 +51,9 @@ const seedDB = async () => {
 };
 
 seedDB();
+
+seedDB().then(() => {
+   mongoose.connection.close();
+});
 
 

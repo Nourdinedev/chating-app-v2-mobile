@@ -37,16 +37,10 @@ module.exports.renderConversation = async (req, res) => {
 
     const findconversation = await Conversation.findOne({ participants: [req.user.email, user2.email] })
     const findconversation2 = await Conversation.findOne({ participants: [user2.email, req.user.email] })
-    console.log(findconversation);
-
-    // if (!findconversation.participants.includes(req.user.email) || !findconversation2.participants.includes(req.user.email)) {
-    //     return res.redirect(`/user`)
-    // }
 
     if (!findconversation && !findconversation2) {
         const conversation = new Conversation()
         conversation.participants.push(req.user.email, user2.email)
-        console.log("convertation not found", conversation);
         await conversation.save()
     }
     if (req.user.contacts.length) {
@@ -63,31 +57,30 @@ module.exports.renderConversation = async (req, res) => {
 
 // send message
 module.exports.sendMessage = async (req, res) => {
-    const user = req.user
-    const user2 = await User.findById(req.params.id)
+    const contact = await User.findById(req.params.id)
     const message = req.body.message
-    if (!user2) {
+    const findconversation = await Conversation.findOne({ participants: [req.user.email, contact.email] })
+    const findconversation2 = await Conversation.findOne({ participants: [contact.email, req.user.email] })
+    if (!contact) {
         return res.redirect(`/user`)
     }
     if (message === "") {
-        return res.redirect(`/user/${user2._id}`)
+        return res.redirect(`/user/${contact._id}`)
     }
-    const findconversation = await Conversation.findOne({ participants: [req.user.email, user2.email] })
-    const findconversation2 = await Conversation.findOne({ participants: [user2.email, req.user.email] })
     if (!findconversation && !findconversation2) {
         const conversation = new Conversation()
-        conversation.participants.push(req.user.email, user2.email)
-        console.log("convertation not found", conversation);
+        conversation.participants.push(req.user.email, contact.email)
         await conversation.save()
     }
     if (findconversation) {
-        const conversation = await Conversation.findByIdAndUpdate(findconversation._id, { $push: { messages: { author: req.user, body: message, timestamp: Date.now() } } })
-        return res.redirect(`/user/${user2._id}`)
+        const conversation = await Conversation.findByIdAndUpdate(findconversation._id, { $push: { messages: { author: { _id: contact._id, name: contact.name, email: contact.email }, body: message, timestamp: Date.now() } } })
+        console.log(conversation);
+        return res.redirect(`/user/${contact._id}`)
     } else if (findconversation2) {
-        const conversation = await Conversation.findByIdAndUpdate(findconversation2._id, { $push: { messages: { author: req.user, body: message, timestamp: Date.now() } } })
-        return res.redirect(`/user/${user2._id}`)
+        const conversation = await Conversation.findByIdAndUpdate(findconversation2._id, { $push: { messages: { author: { _id: contact._id, name: contact.name, email: contact.email }, body: message, timestamp: Date.now() } } })
+        console.log(conversation);
+        return res.redirect(`/user/${contact._id}`)
     }
-    console.log(message);
 }
 
 // redirect to chat page
@@ -103,7 +96,7 @@ module.exports.registerUser = async (req, res) => {
         const email = emailinput.toLowerCase()
         const user = new User({ name, email })
         const registerUser = await User.register(user, password);
-        console.log(user)
+        console.log(user);
         req.login(registerUser, err => {
             if (err) return next(err)
             res.redirect(`/user`)
@@ -124,7 +117,7 @@ module.exports.addUser = async (req, res) => {
         req.flash("add_user_error", "You can not add your self to your contacts");
         return res.redirect("/")
     }
-    console.log(user.contacts);
+
     if (user.contacts.filter(e => e.email === contact.email).length > 0) {
         req.flash("add_user_error", "User is already Added to your contacts");
         return res.redirect("/")
