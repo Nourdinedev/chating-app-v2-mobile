@@ -9,58 +9,63 @@ module.exports.login = passport.authenticate('local', { failureRedirect: '/', fa
 
 // render chat page
 module.exports.renderUser = async (req, res) => {
-    const user = req.user
+    const user = await User.findById(req.user.id)
+    const contact = await User.findById(req.params.id)
+    const findconversation = await Conversation.findOne({ participants: [req.user.email, contact] })
+    const findconversation2 = await Conversation.findOne({ participants: [contact, req.user.email] })
     if (user.contacts.length) {
 
         const ConversationContact = {
             email: '',
             name: ''
         }
-        res.render("chat", { user, ConversationContact, title: `${user.name} | Chat Rooms` });
+        res.render("chat", { user, findconversation, findconversation2, ConversationContact, title: `${user.name} | Chat Rooms` });
     } else {
 
         const ConversationContact = {
             email: '',
             name: ''
         }
-        res.render("chat", { user, ConversationContact, title: `${user.name} | Chat Rooms` });
+        res.render("chat", { user, findconversation, findconversation2, ConversationContact, title: `${user.name} | Chat Rooms` });
     }
 }
 
 // render chat page of a contact
 module.exports.renderConversation = async (req, res) => {
-    const user = req.user
-    const user2 = await User.findById(req.params.id)
-    if (!user2) {
+    const user = await User.findById(req.user.id)
+    const contact = await User.findById(req.params.id)
+    if (!contact) {
         return res.redirect(`/user`)
     }
 
-    const findconversation = await Conversation.findOne({ participants: [req.user.email, user2.email] })
-    const findconversation2 = await Conversation.findOne({ participants: [user2.email, req.user.email] })
+    const findconversation = await Conversation.findOne({ participants: [user.email, contact.email] })
+    const findconversation2 = await Conversation.findOne({ participants: [contact.email, user.email] })
 
     if (!findconversation && !findconversation2) {
         const conversation = new Conversation()
-        conversation.participants.push(req.user.email, user2.email)
+        conversation.participants.push(user.email, contact.email)
         await conversation.save()
     }
-    if (req.user.contacts.length) {
+
+    if (user.contacts.length) {
         const { id } = req.params
         const ConversationContact = await User.findById(id);
-        res.render("chat", { user, ConversationContact, title: `${user.name} | Chat Rooms` });
+        res.render("chat", { user, findconversation, findconversation2, ConversationContact, title: `${user.name} | Chat Rooms` });
     } else {
         const { id } = req.params
         const ConversationContact = await User.findById(id);
-        const addUserToConverstion = await User.findByIdAndUpdate(req.user._id, { $push: { contacts: contact } });
-        res.render("chat", { user, ConversationContact, title: `${user.name} | Chat Rooms` });
+        const addUserToConverstion = await User.findByIdAndUpdate(user._id, { $push: { contacts: contact } });
+        res.render("chat", { user, findconversation, findconversation2, ConversationContact, title: `${user.name} | Chat Rooms` });
     }
 }
 
 // send message
 module.exports.sendMessage = async (req, res) => {
+    const user = await User.findById(req.user.id)
     const contact = await User.findById(req.params.id)
     const message = req.body.message
-    const findconversation = await Conversation.findOne({ participants: [req.user.email, contact.email] })
-    const findconversation2 = await Conversation.findOne({ participants: [contact.email, req.user.email] })
+    const findconversation = await Conversation.findOne({ participants: [user.email, contact.email] })
+    const findconversation2 = await Conversation.findOne({ participants: [contact.email, user.email] })
     if (!contact) {
         return res.redirect(`/user`)
     }
@@ -69,7 +74,7 @@ module.exports.sendMessage = async (req, res) => {
     }
     if (!findconversation && !findconversation2) {
         const conversation = new Conversation()
-        conversation.participants.push(req.user.email, contact.email)
+        conversation.participants.push(user.email, contact.email)
         await conversation.save()
     }
     if (findconversation) {
@@ -113,7 +118,7 @@ module.exports.addUser = async (req, res) => {
 
     const user = await User.findById(req.user._id);
 
-    if (contact.email === req.user.email) {
+    if (contact.email === user.email) {
         req.flash("add_user_error", "You can not add your self to your contacts");
         return res.redirect("/")
     }
@@ -123,7 +128,7 @@ module.exports.addUser = async (req, res) => {
         return res.redirect("/")
     }
 
-    const addUser = await User.findByIdAndUpdate(req.user._id, { $push: { contacts: { _id: contact._id, name: contact.name, email: contact.email } } });
+    const addUser = await User.findByIdAndUpdate(user._id, { $push: { contacts: { _id: contact._id, name: contact.name, email: contact.email } } });
     req.flash("add_user_success", `${contact.name} added to your contacts`);
     console.log(addUser);
     res.redirect("/")

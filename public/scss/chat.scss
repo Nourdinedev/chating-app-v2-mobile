@@ -332,6 +332,81 @@ div {
    grid-area: chat_history;
    background-color: #303841;
    border-top: 2px solid #ffffff17;
+   overflow: auto;
+
+   .message-received {
+      justify-self: self-end;
+      .body {
+         display: flex;
+         align-items: center;
+         justify-content: flex-start;
+
+         span {
+            background-color: #3e4650;
+            text-align: start;
+            margin: 20px 45px 0;
+            padding: 10px 15px;
+            max-width: 500px;
+            color: rgb(202, 202, 202);
+            border-radius: 5px;
+            border: 1px solid #505c69;
+            overflow: hidden;
+         }
+      }
+      .author {
+         display: flex;
+         align-items: center;
+         justify-content: flex-start;
+
+         .name {
+            text-align: start;
+            color: #c1c1c1;
+            margin: 5px 0px 5px 45px;
+         }
+         .time {
+            text-align: start;
+            margin: 5px 10px;
+            color: #808080;
+         }
+      }
+   }
+
+   .message-sent {
+      justify-self: self-end;
+      .body {
+         display: flex;
+         align-items: center;
+         justify-content: flex-end;
+
+         span {
+            background-color: #1c4d8b;
+            text-align: end;
+            margin: 20px 45px 0;
+            padding: 10px 15px;
+            max-width: 500px;
+            color: rgb(202, 202, 202);
+            border-radius: 5px;
+            border: 1px solid #3c70b0;
+            overflow: hidden;
+         }
+      }
+      .author {
+         display: flex;
+         align-items: center;
+         justify-content: flex-end;
+
+         .name {
+            text-align: end;
+            color: #c1c1c1;
+            margin: 5px 45px 5px 0px;
+         }
+         .time {
+            text-align: end;
+            margin: 5px 10px;
+            color: #808080;
+         }
+      }
+   }
 }
 .seven {
    grid-area: send_message;
