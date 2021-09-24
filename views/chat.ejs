@@ -78,54 +78,53 @@
       <div class="six">
          <% if (findconversation){ findconversation.messages.forEach(message=> {%>
             <% if(message.author.email===currentUser.email){ %>
-               <div class="message-sent">
+               <div class="message-received">
                   <div class="body"><span>
                         <%= message.body %>
                      </span></div>
                   <div class="author">
+                     <spane class="name">
+                        <%= message.author.name %>
+                     </spane>
                      <span class="time">3:25</span>
-                     <spane class="name">You</spane>
                   </div>
                </div>
                <% }else{ %>
-                  <div class="message-received">
+                  <div class="message-sent">
                      <div class="body"><span>
                            <%= message.body %>
                         </span></div>
                      <div class="author">
-                        <spane class="name">
-                           <%= message.author.name %>
-                        </spane>
                         <span class="time">3:25</span>
+                        <spane class="name">You</spane>
                      </div>
                   </div>
                   <% } %>
-                     <% });}%>
-                        <%if (findconversation2){ findconversation2.messages.forEach(message=> {%>
-                           <% if(message.author.email===currentUser.email){ %>
-                              <div class="message-received">
+                     <% });}else if (findconversation2){ findconversation2.messages.forEach(message=> {%>
+                        <% if(message.author.email===currentUser.email){ %>
+                           <div class="message-received">
+                              <div class="body"><span>
+                                    <%= message.body %>
+                                 </span></div>
+                              <div class="author">
+                                 <spane class="name">
+                                    <%= message.author.name %>
+                                 </spane>
+                                 <span class="time">3:25</span>
+                              </div>
+                           </div>
+                           <% }else{ %>
+                              <div class="message-sent">
                                  <div class="body"><span>
                                        <%= message.body %>
                                     </span></div>
                                  <div class="author">
-                                    <spane class="name">
-                                       <%= message.author.name %>
-                                    </spane>
                                     <span class="time">3:25</span>
+                                    <spane class="name">You</spane>
                                  </div>
                               </div>
-                              <% }else{ %>
-                                 <div class="message-sent">
-                                    <div class="body"><span>
-                                          <%= message.body %>
-                                       </span></div>
-                                    <div class="author">
-                                       <span class="time">3:25</span>
-                                       <spane class="name">You</spane>
-                                    </div>
-                                 </div>
-                                 <% } %>
-                                    <% });} %>
+                              <% } %>
+                                 <% });} %>
       </div>
       <div class="seven">
          <form action="/user/<%= ConversationContact._id %>" method="POST">
