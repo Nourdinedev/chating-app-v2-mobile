@@ -32,30 +32,31 @@ module.exports.renderUser = async (req, res) => {
 
 // render chat page of a contact
 module.exports.renderConversation = async (req, res) => {
-    const user = await User.findById(req.user.id)
+    const currentUser = await User.findById(req.user.id)
+    const user = req.user
     const contact = await User.findById(req.params.id)
     if (!contact) {
         return res.redirect(`/user`)
     }
 
-    const findconversation = await Conversation.findOne({ participants: [user.email, contact.email] })
-    const findconversation2 = await Conversation.findOne({ participants: [contact.email, user.email] })
+    const findconversation = await Conversation.findOne({ participants: [currentUser.email, contact.email] })
+    const findconversation2 = await Conversation.findOne({ participants: [contact.email, currentUser.email] })
 
     if (!findconversation && !findconversation2) {
         const conversation = new Conversation()
-        conversation.participants.push(user.email, contact.email)
+        conversation.participants.push(currentUser.email, contact.email)
         await conversation.save()
     }
 
-    if (user.contacts.length) {
+    if (currentUser.contacts.length) {
         const { id } = req.params
         const ConversationContact = await User.findById(id);
-        res.render("chat", { user, findconversation, findconversation2, ConversationContact, title: `${user.name} | Chat Rooms` });
+        res.render("chat", { user, currentUser, findconversation, findconversation2, ConversationContact, title: `${user.name} | Chat Rooms` });
     } else {
         const { id } = req.params
         const ConversationContact = await User.findById(id);
         const addUserToConverstion = await User.findByIdAndUpdate(user._id, { $push: { contacts: contact } });
-        res.render("chat", { user, findconversation, findconversation2, ConversationContact, title: `${user.name} | Chat Rooms` });
+        res.render("chat", { user, currentUser, findconversation, findconversation2, ConversationContact, title: `${user.name} | Chat Rooms` });
     }
 }
 
