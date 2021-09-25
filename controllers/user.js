@@ -81,10 +81,40 @@ module.exports.sendMessage = async (req, res) => {
     if (findconversation) {
         const conversation = await Conversation.findByIdAndUpdate(findconversation._id, { $push: { messages: { author: { _id: contact._id, name: contact.name, email: contact.email }, body: message, timestamp: Date.now() } } })
         console.log(conversation);
+
+        if (contact.email === user.email) {
+            req.flash("add_user_error", "You can not add your self to your contacts");
+            return res.redirect("/")
+        }
+
+        if (contact.contacts.filter(e => e.email === user.email).length > 0) {
+            req.flash("add_user_error", "User is already Added to your contacts");
+            return res.redirect("/")
+        }
+
+        const addUser = await User.findByIdAndUpdate(contact._id, { $push: { contacts: { _id: user._id, name: user.name, email: user.email } } });
+        req.flash("add_user_success", `${contact.name} added to your contacts`);
+        console.log(addUser);
         return res.redirect(`/user/${contact._id}`)
+
     } else if (findconversation2) {
         const conversation = await Conversation.findByIdAndUpdate(findconversation2._id, { $push: { messages: { author: { _id: contact._id, name: contact.name, email: contact.email }, body: message, timestamp: Date.now() } } })
         console.log(conversation);
+
+        if (contact.email === user.email) {
+            req.flash("add_user_error", "You can not add your self to your contacts");
+            return res.redirect("/")
+        }
+
+        if (contact.contacts.filter(e => e.email === user.email).length > 0) {
+            req.flash("add_user_error", "User is already Added to your contacts");
+            return res.redirect("/")
+        }
+
+        const addUser = await User.findByIdAndUpdate(contact._id, { $push: { contacts: { _id: user._id, name: user.name, email: user.email } } });
+        req.flash("add_user_success", `${contact.name} added to your contacts`);
+        console.log(addUser);
+
         return res.redirect(`/user/${contact._id}`)
     }
 }
@@ -116,7 +146,6 @@ module.exports.registerUser = async (req, res) => {
 // add user
 module.exports.addUser = async (req, res) => {
     const contact = await User.findOne(req.body);
-
     const user = await User.findById(req.user._id);
 
     if (contact.email === user.email) {
