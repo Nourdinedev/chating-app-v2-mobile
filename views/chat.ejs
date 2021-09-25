@@ -72,7 +72,7 @@
          </span>
       </div>
 
-      <div class="six">
+      <div class="six" id="messages">
          <% if (findconversation){ findconversation.messages.forEach(message=> {%>
             <% if(message.author.email===currentUser.email){ %>
                <div class="message-received">
@@ -130,3 +130,5 @@
          </form>
       </div>
    </div>
+
+   <script src="/js/chat.js"></script>
