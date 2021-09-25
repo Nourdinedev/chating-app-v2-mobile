@@ -51,12 +51,12 @@ module.exports.renderConversation = async (req, res) => {
     if (currentUser.contacts.length) {
         const { id } = req.params
         const ConversationContact = await User.findById(id);
-        res.render("chat", { user, currentUser, findconversation, findconversation2, ConversationContact, title: `${user.name} | Chat Rooms` });
+        res.render("chat", { user, contact, currentUser, findconversation, findconversation2, ConversationContact, title: `${user.name} | Chat Rooms` });
     } else {
         const { id } = req.params
         const ConversationContact = await User.findById(id);
         const addUserToConverstion = await User.findByIdAndUpdate(user._id, { $push: { contacts: contact } });
-        res.render("chat", { user, currentUser, findconversation, findconversation2, ConversationContact, title: `${user.name} | Chat Rooms` });
+        res.render("chat", { user, contact, currentUser, findconversation, findconversation2, ConversationContact, title: `${user.name} | Chat Rooms` });
     }
 }
 
@@ -84,12 +84,12 @@ module.exports.sendMessage = async (req, res) => {
 
         if (contact.email === user.email) {
             req.flash("add_user_error", "You can not add your self to your contacts");
-            return res.redirect("/")
+            return res.redirect(`/user/${contact._id}`)
         }
 
         if (contact.contacts.filter(e => e.email === user.email).length > 0) {
             req.flash("add_user_error", "User is already Added to your contacts");
-            return res.redirect("/")
+            return res.redirect(`/user/${contact._id}`)
         }
 
         const addUser = await User.findByIdAndUpdate(contact._id, { $push: { contacts: { _id: user._id, name: user.name, email: user.email } } });
@@ -103,12 +103,12 @@ module.exports.sendMessage = async (req, res) => {
 
         if (contact.email === user.email) {
             req.flash("add_user_error", "You can not add your self to your contacts");
-            return res.redirect("/")
+            return res.redirect(`/user/${contact._id}`)
         }
 
         if (contact.contacts.filter(e => e.email === user.email).length > 0) {
             req.flash("add_user_error", "User is already Added to your contacts");
-            return res.redirect("/")
+            return res.redirect(`/user/${contact._id}`)
         }
 
         const addUser = await User.findByIdAndUpdate(contact._id, { $push: { contacts: { _id: user._id, name: user.name, email: user.email } } });

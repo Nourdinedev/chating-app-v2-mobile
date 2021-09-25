@@ -9,9 +9,9 @@
                <img
                   src="https://d5nunyagcicgy.cloudfront.net/external_assets/hero_examples/hair_beach_v391182663/original.jpeg"
                   alt="<%= user.name %> image">
-               <div class="online-state">
+               <!-- <div class="online-state">
                   <div class="state-text">Online</div>
-               </div>
+               </div> -->
             </div>
             <div class="self__user-name">
                <%= user.name %>
@@ -22,13 +22,6 @@
          </div>
       </div>
 
-      <div class="add-user">
-         <form action="/user?_method=patch" method="POST">
-            <input type="text" name="email" placeholder="Add contact by email">
-            <button>ADD</button>
-         </form>
-      </div>
-
       <div class="two">
          <a href="/user/sign-out">
             <img id="sign-out"
@@ -37,19 +30,22 @@
       </div>
 
       <div class="three">
-         <input type="text" placeholder="Search">
-         <img class="input-icon"
-            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGc+CgkJPHBhdGggZD0iTTIyNS40NzQsMEMxMDEuMTUxLDAsMCwxMDEuMTUxLDAsMjI1LjQ3NGMwLDEyNC4zMywxMDEuMTUxLDIyNS40NzQsMjI1LjQ3NCwyMjUuNDc0ICAgIGMxMjQuMzMsMCwyMjUuNDc0LTEwMS4xNDQsMjI1LjQ3NC0yMjUuNDc0QzQ1MC45NDgsMTAxLjE1MSwzNDkuODA0LDAsMjI1LjQ3NCwweiBNMjI1LjQ3NCw0MDkuMzIzICAgIGMtMTAxLjM3MywwLTE4My44NDgtODIuNDc1LTE4My44NDgtMTgzLjg0OFMxMjQuMTAxLDQxLjYyNiwyMjUuNDc0LDQxLjYyNnMxODMuODQ4LDgyLjQ3NSwxODMuODQ4LDE4My44NDggICAgUzMyNi44NDcsNDA5LjMyMywyMjUuNDc0LDQwOS4zMjN6IiBmaWxsPSIjNjk3NDdlIiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+Cgk8L2c+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KCTxnPgoJCTxwYXRoIGQ9Ik01MDUuOTAyLDQ3Ni40NzJMMzg2LjU3NCwzNTcuMTQ0Yy04LjEzMS04LjEzMS0yMS4yOTktOC4xMzEtMjkuNDMsMGMtOC4xMzEsOC4xMjQtOC4xMzEsMjEuMzA2LDAsMjkuNDNsMTE5LjMyOCwxMTkuMzI4ICAgIGM0LjA2NSw0LjA2NSw5LjM4Nyw2LjA5OCwxNC43MTUsNi4wOThjNS4zMjEsMCwxMC42NDktMi4wMzMsMTQuNzE1LTYuMDk4QzUxNC4wMzMsNDk3Ljc3OCw1MTQuMDMzLDQ4NC41OTYsNTA1LjkwMiw0NzYuNDcyeiIgZmlsbD0iIzY5NzQ3ZSIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPgoJPC9nPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjwvZz48L3N2Zz4=" />
+         <div class="add-user">
+            <form action="/user?_method=patch" method="POST">
+               <input type="text" name="email" placeholder="Add contact by email">
+               <button>ADD</button>
+            </form>
+         </div>
       </div>
 
       <div class="four">
          <% user.contacts.forEach(contact=> {%>
-            <a href="/user/<%= contact.id %>">
+            <a href="/user/<%= contact.id %>" id="<%= contact.id %>">
                <div class="user-container">
                   <dir class="user-img">
                      <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"
                         alt="<%= contact.name %> image">
-                     <div class="online-state"></div>
+                     <!-- <div class="online-state"></div> -->
                   </dir>
                   <div class="user-wrapper">
                      <h4 class="user-name">
@@ -81,9 +77,11 @@
                      </span></div>
                   <div class="author">
                      <spane class="name">
-                        <%= message.author.name %>
+                        <%= contact.name %>
                      </spane>
-                     <span class="time">3:25</span>
+                     <span class="time">
+                        <%= new Date(message.timestamp).toString().slice(16,21).trim() %>
+                     </span>
                   </div>
                </div>
                <% }else{ %>
@@ -92,7 +90,9 @@
                            <%= message.body %>
                         </span></div>
                      <div class="author">
-                        <span class="time">3:25</span>
+                        <span class="time">
+                           <%= new Date(message.timestamp).toString().slice(16,21).trim() %>
+                        </span>
                         <spane class="name">You</spane>
                      </div>
                   </div>
@@ -105,9 +105,11 @@
                                  </span></div>
                               <div class="author">
                                  <spane class="name">
-                                    <%= message.author.name %>
+                                    <%= contact.name %>
                                  </spane>
-                                 <span class="time">3:25</span>
+                                 <span class="time">
+                                    <%= new Date(message.timestamp).toString().slice(16,21).trim() %>
+                                 </span>
                               </div>
                            </div>
                            <% }else{ %>
@@ -116,7 +118,9 @@
                                        <%= message.body %>
                                     </span></div>
                                  <div class="author">
-                                    <span class="time">3:25</span>
+                                    <span class="time">
+                                       <%= new Date(message.timestamp).toString().slice(16,21).trim() %>
+                                    </span>
                                     <spane class="name">You</spane>
                                  </div>
                               </div>
