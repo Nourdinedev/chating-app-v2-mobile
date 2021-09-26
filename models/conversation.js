@@ -30,7 +30,7 @@ const ConversationSchema = new Schema({
                 type: Number,
             }
         }
-    ]
+    ],
 });
 
 module.exports = mongoose.model("Conversation", ConversationSchema);

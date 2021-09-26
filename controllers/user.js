@@ -81,6 +81,10 @@ module.exports.sendMessage = async (req, res) => {
     if (findconversation) {
         const conversation = await Conversation.findByIdAndUpdate(findconversation._id, { $push: { messages: { author: { _id: contact._id, name: contact.name, email: contact.email }, body: message, timestamp: Date.now() } } })
         console.log(conversation);
+        const updateUser = await User.updateOne({ _id: user._id, contacts: { $elemMatch: { email: `${contact.email}`, _id: `${contact._id}` } } }, { $set: { "contacts.$.lastMessage": `${message}` } })
+        const updateContact = await User.updateOne({ _id: req.params.id, contacts: { $elemMatch: { email: `${user.email}`, _id: `${user._id}` } } }, { $set: { "contacts.$.lastMessage": `${message}` } })
+        console.log(updateUser);
+        console.log(updateContact);
 
         if (contact.email === user.email) {
             req.flash("add_user_error", "You can not add your self to your contacts");
@@ -92,7 +96,7 @@ module.exports.sendMessage = async (req, res) => {
             return res.redirect(`/user/${contact._id}`)
         }
 
-        const addUser = await User.findByIdAndUpdate(contact._id, { $push: { contacts: { _id: user._id, name: user.name, email: user.email } } });
+        const addUser = await User.findByIdAndUpdate(contact._id, { $push: { contacts: { _id: user._id, name: user.name, email: user.email, lastMessage: "" } } });
         req.flash("add_user_success", `${contact.name} added to your contacts`);
         console.log(addUser);
         return res.redirect(`/user/${contact._id}`)
@@ -101,6 +105,11 @@ module.exports.sendMessage = async (req, res) => {
         const conversation = await Conversation.findByIdAndUpdate(findconversation2._id, { $push: { messages: { author: { _id: contact._id, name: contact.name, email: contact.email }, body: message, timestamp: Date.now() } } })
         console.log(conversation);
 
+        const updateUser = await User.updateOne({ _id: user._id, contacts: { $elemMatch: { email: `${contact.email}`, _id: `${contact._id}` } } }, { $set: { "contacts.$.lastMessage": `${message}` } })
+        const updateContact = await User.updateOne({ _id: req.params.id, contacts: { $elemMatch: { email: `${user.email}`, _id: `${user._id}` } } }, { $set: { "contacts.$.lastMessage": `${message}` } })
+        console.log(updateUser);
+        console.log(updateContact);
+
         if (contact.email === user.email) {
             req.flash("add_user_error", "You can not add your self to your contacts");
             return res.redirect(`/user/${contact._id}`)
@@ -111,10 +120,9 @@ module.exports.sendMessage = async (req, res) => {
             return res.redirect(`/user/${contact._id}`)
         }
 
-        const addUser = await User.findByIdAndUpdate(contact._id, { $push: { contacts: { _id: user._id, name: user.name, email: user.email } } });
+        const addUser = await User.findByIdAndUpdate(contact._id, { $push: { contacts: { _id: user._id, name: user.name, email: user.email, lastMessage: "" } } });
         req.flash("add_user_success", `${contact.name} added to your contacts`);
         console.log(addUser);
-
         return res.redirect(`/user/${contact._id}`)
     }
 }
@@ -158,7 +166,7 @@ module.exports.addUser = async (req, res) => {
         return res.redirect("/")
     }
 
-    const addUser = await User.findByIdAndUpdate(user._id, { $push: { contacts: { _id: contact._id, name: contact.name, email: contact.email } } });
+    const addUser = await User.findByIdAndUpdate(user._id, { $push: { contacts: { _id: contact._id, name: contact.name, email: contact.email, lastMessage: "" } } });
     req.flash("add_user_success", `${contact.name} added to your contacts`);
     console.log(addUser);
     res.redirect("/")

@@ -195,7 +195,7 @@ div {
    .user-container {
       display: grid;
       grid-template-columns: auto;
-      grid-template-areas: ". users_image users_info users_info .";
+      grid-template-areas: "users_image users_info users_info";
       transition: 0.2s ease-in-out;
       border-bottom: 2px solid #303841;
       &:hover {
@@ -233,13 +233,15 @@ div {
          display: grid;
          grid-template-columns: auto;
          grid-template-areas:
-            "users_info_name users_info_name users_info_unread . ."
-            "users_info_msg users_info_msg . . .";
+            "users_info_name users_info_unread"
+            "users_info_msg .";
 
          h4,
          h5 {
             margin: 0;
             padding: 0;
+            width: 175px;
+            text-align: start;
          }
          h4 {
             grid-area: users_info_name;
@@ -270,6 +272,7 @@ div {
             border-radius: 15px;
             height: 20px;
             width: 20px;
+            display: none;
          }
          span {
             align-self: center;
@@ -345,8 +348,7 @@ div {
             padding: 10px 15px;
             max-width: 500px;
             color: rgb(202, 202, 202);
-            border-radius: 5px;
-            border: 1px solid #505c69;
+            border-radius: 1.25rem 1.25rem 1.25rem 0;
             overflow: hidden;
          }
       }
@@ -382,8 +384,7 @@ div {
             padding: 10px 15px;
             max-width: 500px;
             color: rgb(202, 202, 202);
-            border-radius: 5px;
-            border: 1px solid #38649b;
+            border-radius: 1.25rem 1.25rem 0 1.25rem;
             overflow: hidden;
          }
       }

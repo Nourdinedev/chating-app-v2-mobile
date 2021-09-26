@@ -52,7 +52,13 @@
                         <%= contact.name %>
                      </h4>
                      <div class="unread-messages"><span>3</span></div>
-                     <h5 class="last-message">Hi Danna how are you Do...</h5>
+                     <% if(contact.lastMessage==="" ){ %>
+                        <h5 class="last-message">No message sent yet...</h5>
+                        <% }else{ %>
+                           <h5 class="last-message">
+                              <%= contact.lastMessage.trim().slice(0,15) %>...
+                           </h5>
+                           <% } %>
                   </div>
                </div>
             </a>
