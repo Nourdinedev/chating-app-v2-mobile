@@ -45,7 +45,12 @@
                   <dir class="user-img">
                      <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"
                         alt="<%= contact.name %> image">
-                     <!-- <div class="online-state"></div> -->
+                     <% if(contact.isOnline){ %>
+                        <div class="online-state"></div>
+                        <% }else{ %>
+                           <div class="offline-state"></div>
+                           <% } %>
+
                   </dir>
                   <div class="user-wrapper">
                      <h4 class="user-name">
@@ -124,15 +129,15 @@
    <script src="/socket.io/socket.io.js"></script>
    <script>
       const socket = io();
-      const url = window.location.href
-      const urlsplit = url.split("/");
-      const room = urlsplit[4];
+      // const url = window.location.href
+      // const urlsplit = url.split("/");
+      // const room = urlsplit[4];
 
-      if (room) {
-         socket.emit("room", room)
-      }
+      // if (room) {
+      //    socket.emit("room", room)
+      // }
 
-      socket.on("reseve_message", (data) => {
-         console.log(data);
-      })
+      // socket.on("reseve_message", (data) => {
+      //    console.log(data);
+      // })
    </script>

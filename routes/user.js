@@ -15,15 +15,18 @@ const catchAsync = require("../utils/catchAsync")
 const { isLoggedIn, toLowercase } = require("../middleware")
 
 //user routes
+router.get("/", isLoggedIn, catchAsync(UserControllers.renderUser));
+
+router.patch("/", toLowercase, catchAsync(UserControllers.addUser))
+
 router.post("/sign-up", UserValidation, catchAsync(UserControllers.registerUser));
 
 router.post("/sign-in", toLowercase, UserControllers.login, catchAsync(UserControllers.redirectToUser));
 
 router.get("/sign-out", UserControllers.logoutUser);
 
-router.get("/", isLoggedIn, catchAsync(UserControllers.renderUser));
+router.get("/test", catchAsync(UserControllers.renderTest));
 
-router.patch("/", toLowercase, catchAsync(UserControllers.addUser))
 
 router.route("/:id")
     .get(isLoggedIn, catchAsync(UserControllers.renderConversation))

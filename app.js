@@ -15,7 +15,7 @@ const flash = require("connect-flash")
 
 // set up socket
 const { Server } = require("socket.io");
-module.exports.io = new Server(server);
+module.exports.io = new Server(server, { log: false });
 
 // require mongoose
 const mongoose = require("mongoose");

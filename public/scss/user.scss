@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500&display=swap");
+
+body {
+   margin: 0;
+   padding: 0;
+   font-family: "Noto Sans JP", sans-serif;
+   background-color: rgb(220, 220, 220);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+   border: none;
+   -webkit-text-fill-color: rgb(34, 34, 34);
+   -webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+   transition: background-color 5000s ease-in-out 0s;
+}
+
+.wrapper {
+   height: 100vh;
+   background-color: rgb(220, 220, 220);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   .container {
+      max-height: 625px;
+      width: 425px;
+      background-color: rgb(255, 255, 255);
+      border-radius: 15px;
+      padding: 5px;
+
+      .user_wrapper {
+         .user_info {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+            margin: 15px 25px;
+            padding-bottom: 15px;
+            display: grid;
+            align-items: center;
+            grid-template-columns: auto 1fr auto;
+            grid-template-areas:
+               "user_img user_name_state user_logout"
+               "user_img user_name_state user_logout";
+
+            img {
+               grid-area: user_img;
+               height: 60px;
+               width: 60px;
+               border-radius: 100%;
+               object-fit: cover;
+            }
+            .user_name_state {
+               grid-area: user_name_state;
+               margin-left: 15px;
+               display: grid;
+               align-items: center;
+               justify-content: start;
+               .name {
+                  font-size: 1.1rem;
+                  font-weight: 700;
+                  color: rgb(70, 70, 70);
+               }
+               .state {
+                  font-size: 1rem;
+                  color: rgb(141, 141, 141);
+               }
+            }
+            .user_logout {
+               grid-area: user_logout;
+               align-self: center;
+               justify-self: end;
+
+               button {
+                  background-color: rgb(70, 70, 70);
+                  color: rgb(232, 232, 232);
+                  border: none;
+                  padding: 8px 15px;
+                  border-radius: 5px;
+                  font-size: 1rem;
+                  &:hover {
+                     opacity: 0.9;
+                     cursor: pointer;
+                  }
+               }
+            }
+         }
+      }
+      .add_user {
+         margin: 15px 25px 0 25px;
+         padding-bottom: 15px;
+         border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+
+         form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            input {
+               padding: 12px 15px;
+               width: 75%;
+               border: none;
+               background-color: rgb(0 0 0 / 10%);
+               font-size: 0.9rem;
+               color: rgb(197, 197, 197);
+               border-radius: 5px 0 0 5px;
+               &:focus {
+                  color: rgb(197, 197, 197);
+                  outline: none;
+               }
+            }
+            button {
+               padding: 13px 15px;
+               border: none;
+               font-size: 0.8rem;
+               font-weight: 600;
+               color: #ebebeb;
+               border-radius: 0 5px 5px 0;
+               background-color: rgb(70, 70, 70);
+               &:hover {
+                  cursor: pointer;
+                  opacity: 0.9;
+               }
+            }
+         }
+      }
+
+      .contact_wrapper {
+         margin: 0px 25px;
+         padding: 5px 10px;
+
+         .contact_container {
+            text-decoration: none;
+            padding: 10px;
+            background-color: rgb(255, 255, 255);
+            display: grid;
+            margin: 5px 0px;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            justify-content: center;
+            grid-template-areas:
+               "user_img contact_name_lastMessage contact_state"
+               "user_img contact_name_lastMessage contact_state";
+            border-bottom: 1px solid #efefef;
+            &:hover {
+               background-color: rgba(0, 0, 0, 0.05);
+            }
+            img {
+               grid-area: user_img;
+               width: 50px;
+               height: 50px;
+               object-fit: cover;
+               border-radius: 100%;
+            }
+
+            .contact_name_lastMessage {
+               grid-area: contact_name_lastMessage;
+               display: grid;
+               align-items: center;
+               justify-content: start;
+               margin-left: 15px;
+               .name {
+                  font-size: 1rem;
+                  font-weight: 700;
+                  color: rgb(70, 70, 70);
+               }
+               .lastMessage {
+                  font-size: 0.8rem;
+                  color: rgb(141, 141, 141);
+               }
+            }
+            .contact_state {
+               grid-area: contact_state;
+               height: 10px;
+               width: 10px;
+               border-radius: 100%;
+               background-color: rgb(10, 181, 107);
+               margin-right: 10px;
+            }
+         }
+      }
+   }
+}
+
+@media screen and (max-width: 450px) {
+   .wrapper {
+      height: 100vh;
+      background-color: rgb(220, 220, 220);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .container {
+         height: 100%;
+         width: 100%;
+         background-color: rgb(255, 255, 255);
+         border-radius: 0px;
+      }
+   }
+}

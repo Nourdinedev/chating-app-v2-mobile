@@ -45,15 +45,15 @@ function scssTask3() {
    ); // seting the destination of the compiled css and the map file to a folder called dist
 }
 
-// function scssTask4() {
-//    return (
-//       src("public/scss/profile.scss", { sourcemaps: true }) // selecting the style/main scss file || { sourcemaps: true } will generate a .css.map file (show which scss file  the styles are coming from)
-//          .pipe(sass()) // running sass function to compile scss to css
-//          .pipe(postcss([autoprefixer(), cssnano()])) // using autoprefixer function will add the browser prefixes to support older browsers || and cssnano function to minify css file
-//          // .pipe(rev())
-//          .pipe(dest("dist/CSS", { sourcemaps: "." }))
-//    ); // seting the destination of the compiled css and the map file to a folder called dist
-// }
+function scssTask4() {
+   return (
+      src("public/scss/user.scss", { sourcemaps: true }) // selecting the style/main scss file || { sourcemaps: true } will generate a .css.map file (show which scss file  the styles are coming from)
+         .pipe(sass()) // running sass function to compile scss to css
+         .pipe(postcss([autoprefixer(), cssnano()])) // using autoprefixer function will add the browser prefixes to support older browsers || and cssnano function to minify css file
+         // .pipe(rev())
+         .pipe(dest("dist/CSS", { sourcemaps: "." }))
+   ); // seting the destination of the compiled css and the map file to a folder called dist
+}
 
 function scssTask5() {
    return (
@@ -126,6 +126,7 @@ function watchTask() {
          scssTask1,
          scssTask2,
          scssTask3,
+         scssTask4,
          scssTask5,
          jsTask1,
          jsTask2,
@@ -141,6 +142,7 @@ exports.default = series(
    scssTask1,
    scssTask2,
    scssTask3,
+   scssTask4,
    scssTask5,
    jsTask1,
    jsTask2,

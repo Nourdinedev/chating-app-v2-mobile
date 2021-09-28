@@ -30,7 +30,22 @@ module.exports.registerUser = async (req, res) => {
 // add user
 module.exports.addUser = async (req, res) => {
     const contact = await User.findOne(req.body);
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(req.user.id);
+
+    if (!contact) {
+        req.flash("add_user_error", "Contact not found");
+        return res.redirect("/")
+    }
+
+    if (contact.email === user.email) {
+        req.flash("add_user_error", "You can not add your self to your contacts");
+        return res.redirect("/")
+    }
+
+    if (user.contacts.filter(e => e.email === contact.email).length > 0) {
+        req.flash("add_user_error", "User is already Added to your contacts");
+        return res.redirect("/")
+    }
 
     const participants = [
         {
@@ -44,16 +59,6 @@ module.exports.addUser = async (req, res) => {
     ]
     const conversation = new Conversation({ participants })
     await conversation.save()
-
-    if (contact.email === user.email) {
-        req.flash("add_user_error", "You can not add your self to your contacts");
-        return res.redirect("/")
-    }
-
-    if (user.contacts.filter(e => e.email === contact.email).length > 0) {
-        req.flash("add_user_error", "User is already Added to your contacts");
-        return res.redirect("/")
-    }
 
     const addUser = await User.findByIdAndUpdate(user._id, { $push: { contacts: { _id: contact._id, name: contact.name, email: contact.email, lastMessage: "", conversation: conversation._id } } });
     req.flash("add_user_success", `${contact.name} added to your contacts`);
@@ -69,40 +74,28 @@ module.exports.renderUser = async (req, res) => {
         name: ''
     }
 
-    // if (user.contacts.length) {
-    //     user.contacts.forEach(async (contact) => {
-    //         const Allcontacts = []
-    //         const eachContact = await User.findById(contact._id);
-    //         await Allcontacts.push(eachContact)
-
-    //         return res.render("chat", { user, findconversation, Allcontacts, ConversationContact, title: `${user.name} | Chat Rooms` });
-    //     })
-
-    // }
+    const changeState = async (state) => {
+        const userState = await User.findByIdAndUpdate(user._id, { isOnline: state })
+        userState.contacts.forEach(async contact => {
+            const updateContact = await User.updateOne({ _id: contact._id, contacts: { $elemMatch: { email: `${user.email}`, _id: `${user._id}` } } }, { $set: { "contacts.$.isOnline": state } })
+        })
+    }
 
     io.on('connection', async (socket) => {
-        socket.id = user._id
-        console.log(`a user is online ${socket.id}`);
-        const userState = await User.findByIdAndUpdate(user._id, { isOnline: true })
-        // socket.emit("user_online", message)
+        changeState(true)
 
-        userState.contacts.forEach(async contact => {
-            const updateContact = await User.updateOne({ _id: contact._id, contacts: { $elemMatch: { email: `${user.email}`, _id: `${user._id}` } } }, { $set: { "contacts.$.isOnline": true } })
-        })
-        // socket.on("send_message", (data) => {
-        //     socket.emit("reseve_message", message)
-        // })
         socket.on('disconnect', async () => {
-            const userState = await User.findByIdAndUpdate(user._id, { isOnline: false })
-            userState.contacts.forEach(async contact => {
-                const updateContact = await User.updateOne({ _id: contact._id, contacts: { $elemMatch: { email: `${user.email}`, _id: `${user._id}` } } }, { $set: { "contacts.$.isOnline": false } })
-            })
-            console.log('user disconnected');
+            changeState(false)
         });
     });
 
     res.render("chat", { user, findconversation, ConversationContact, title: `${user.name} | Chat Rooms` });
 
+}
+
+
+module.exports.renderTest = async (req, res) => {
+    res.render("user", { title: `test | Chat Rooms` });
 }
 
 // render chat page of a contact
@@ -124,21 +117,6 @@ module.exports.renderConversation = async (req, res) => {
         return res.redirect(`/user`)
     }
     res.render("chat", { user, findconversation, contact, ConversationContact, currentUser, title: `${user.name} | Chat Rooms` });
-
-
-    io.on('connection', (socket) => {
-        socket.id = user._id
-        console.log(`a user with id ${socket.id} join the chat room ${findconversation._id}`);
-        // socket.emit("join_room", message)
-
-        // socket.on("send_message", (data) => {
-        //     socket.emit("reseve_message", message)
-        // })
-        socket.on('disconnect', () => {
-            console.log('user disconnected');
-        });
-    });
-
 }
 
 // redirect to chat page
@@ -151,7 +129,6 @@ module.exports.sendMessage = async (req, res) => {
     const user = await User.findById(req.user.id)
     const message = req.body.message
     const findconversation = await Conversation.findById(req.params.id)
-
 
     const participants = (findconversation.participants)
     participants.forEach(participant => {
@@ -176,21 +153,6 @@ module.exports.sendMessage = async (req, res) => {
     const conversation = await Conversation.findByIdAndUpdate(findconversation._id, { $push: { messages: { author: { _id: contact._id, name: contact.name, email: contact.email }, body: message, timestamp: Date.now() } } })
     const updateUser = await User.updateOne({ _id: user._id, contacts: { $elemMatch: { email: `${contact.email}`, _id: `${contact._id}` } } }, { $set: { "contacts.$.lastMessage": `${message}` } })
     const updateContact = await User.updateOne({ _id: contact._id, contacts: { $elemMatch: { email: `${user.email}`, _id: `${user._id}` } } }, { $set: { "contacts.$.lastMessage": `${message}` } })
-
-    io.on('connection', (socket) => {
-        socket.id = user._id
-        console.log(`a user sends a message ${socket.id}`);
-
-
-        socket.emit("send_message", message)
-
-        // socket.on("send_message", (data) => {
-        //     socket.emit("reseve_message", message)
-        // })
-        socket.on('disconnect', () => {
-            console.log('user disconnected');
-        });
-    });
 
     if (contact.email === user.email) {
         req.flash("add_user_error", "You can not add your self to your contacts");

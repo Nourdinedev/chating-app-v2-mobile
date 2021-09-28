@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="/CSS/user.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="user_wrapper">
+                <div class="user_info">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIQTDD7FUwpZ-h9vS9EflnjcKP3_ORFo90lA&usqp=CAU"
+                        alt="">
+
+                    <div class="user_name_state">
+                        <div class="name">Jhon Doe</div>
+                        <div class="state">Active now</div>
+                    </div>
+
+                    <div class="user_logout">
+                        <form action="">
+                            <button>Logout</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <div class="add_user">
+                <form action="/user?_method=patch" method="POST">
+                    <input type="text" name="email" placeholder="Add contact by email">
+                    <button>ADD</button>
+                </form>
+            </div>
+
+            <div class="contact_wrapper">
+                <a href="#" class="contact_container">
+                    <img src="https://d5nunyagcicgy.cloudfront.net/external_assets/hero_examples/hair_beach_v391182663/original.jpeg"
+                        alt="">
+                    <div class="contact_name_lastMessage">
+                        <div class="name">Locass Hob</div>
+                        <div class="lastMessage">last message sent...</div>
+                    </div>
+                    <div class="contact_state"></div>
+                </a>
+
+                <a href="#" class="contact_container">
+                    <img src="https://d5nunyagcicgy.cloudfront.net/external_assets/hero_examples/hair_beach_v391182663/original.jpeg"
+                        alt="">
+                    <div class="contact_name_lastMessage">
+                        <div class="name">Locass Hob</div>
+                        <div class="lastMessage">last message sent...</div>
+                    </div>
+                    <div class="contact_state"></div>
+                </a>
+            </div>
+        </div>
+    </div>

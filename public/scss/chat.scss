@@ -225,6 +225,16 @@ div {
             position: absolute;
             width: 11px;
          }
+         .offline-state {
+            background-color: #aeaeae;
+            border: 4px solid #303841;
+            border-radius: 15px;
+            bottom: 1px;
+            height: 11px;
+            left: 45px;
+            position: absolute;
+            width: 11px;
+         }
       }
       .user-wrapper {
          grid-area: users_info;
