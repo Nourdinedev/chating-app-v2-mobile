@@ -1,6 +1,8 @@
-// require express
+// require express server
 const express = require("express");
 const app = express();
+const http = require("http");
+const server = http.createServer(app);
 
 //require expressLeyouts for EJS
 const expressLayouts = require('express-ejs-layouts');
@@ -11,14 +13,9 @@ const session = require("express-session")
 //require flash
 const flash = require("connect-flash")
 
-// require path
-// const path = require("path");
-
 // set up socket
-const http = require("http");
-const socketio = require("socket.io");
-const server = http.createServer(app);
-const io = socketio(server);
+const { Server } = require("socket.io");
+module.exports.io = new Server(server);
 
 // require mongoose
 const mongoose = require("mongoose");

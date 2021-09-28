@@ -26,6 +26,9 @@ const UserSchema = new Schema({
          email: {
             type: String
          },
+         conversation: {
+            type: String
+         },
          lastMessage: {
             type: String,
          }

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router()
 
+
 // Joi valedation
 const UserValidation = require("../schemas")
 

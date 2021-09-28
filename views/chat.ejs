@@ -40,7 +40,7 @@
 
       <div class="four">
          <% user.contacts.forEach(contact=> {%>
-            <a href="/user/<%= contact.id %>">
+            <a href="/user/<%= contact.conversation %>">
                <div class="user-container">
                   <dir class="user-img">
                      <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg"
@@ -67,7 +67,7 @@
 
       <div class="five">
          <span class="user-name">
-            <%=ConversationContact.name %>
+            <%= ConversationContact.name %>
          </span>
          <span class="user-email">
             <%= ConversationContact.email %>
@@ -77,6 +77,7 @@
       <div class="six" id="messages">
          <% if (findconversation){ findconversation.messages.forEach(message=> {%>
             <% if(message.author.email===currentUser.email){ %>
+
                <div class="message-received">
                   <div class="body"><span>
                         <%= message.body %>
@@ -90,7 +91,9 @@
                      </span>
                   </div>
                </div>
+
                <% }else{ %>
+
                   <div class="message-sent">
                      <div class="body"><span>
                            <%= message.body %>
@@ -102,43 +105,34 @@
                         <spane class="name">You</spane>
                      </div>
                   </div>
+
                   <% } %>
-                     <% });}else if (findconversation2){ findconversation2.messages.forEach(message=> {%>
-                        <% if(message.author.email===currentUser.email){ %>
-                           <div class="message-received">
-                              <div class="body"><span>
-                                    <%= message.body %>
-                                 </span></div>
-                              <div class="author">
-                                 <spane class="name">
-                                    <%= contact.name %>
-                                 </spane>
-                                 <span class="time">
-                                    <%= new Date(message.timestamp).toString().slice(16,21).trim() %>
-                                 </span>
-                              </div>
-                           </div>
-                           <% }else{ %>
-                              <div class="message-sent">
-                                 <div class="body"><span>
-                                       <%= message.body %>
-                                    </span></div>
-                                 <div class="author">
-                                    <span class="time">
-                                       <%= new Date(message.timestamp).toString().slice(16,21).trim() %>
-                                    </span>
-                                    <spane class="name">You</spane>
-                                 </div>
-                              </div>
-                              <% } %>
-                                 <% });} %>
+
+                     <% });} %>
       </div>
       <div class="seven">
-         <form action="/user/<%= ConversationContact._id %>" method="POST">
-            <input type="text" placeholder="Type something to send..." name="message">
-            <button>SEND</button>
-         </form>
+         <% if (findconversation) {%>
+            <form id="message_form" action="/user/<%= findconversation._id %>" method="POST">
+               <input id="send_message" type="text" placeholder="Type something to send..." name="message">
+               <button>SEND</button>
+            </form>
+            <% } %>
       </div>
    </div>
 
    <script src="/js/chat.js"></script>
+   <script src="/socket.io/socket.io.js"></script>
+   <script>
+      const socket = io();
+      const url = window.location.href
+      const urlsplit = url.split("/");
+      const room = urlsplit[4];
+
+      if (room) {
+         socket.emit("room", room)
+      }
+
+      socket.on("reseve_message", (data) => {
+         console.log(data);
+      })
+   </script>

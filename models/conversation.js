@@ -5,7 +5,13 @@ const Schema = mongoose.Schema;
 const ConversationSchema = new Schema({
     participants: [
         {
-            type: String,
+            _id: {
+                type: Schema.Types.ObjectId,
+                ref: "User",
+            },
+            email: {
+                type: String
+            }
         }
     ],
     messages: [
