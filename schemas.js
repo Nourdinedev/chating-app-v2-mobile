@@ -7,7 +7,7 @@ const UserValidation = (req, res, next) => {
     const Userschema = Joi.object({
         user: Joi.object({
             name: Joi.string()
-                .min(5)
+                .min(3)
                 .max(30)
                 .required(),
 

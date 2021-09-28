@@ -14,6 +14,9 @@ const UserSchema = new Schema({
    photo: {
       type: String,
    },
+   isOnline: {
+      type: Boolean
+   },
    contacts: [
       {
          _id: {
@@ -25,6 +28,9 @@ const UserSchema = new Schema({
          },
          email: {
             type: String
+         },
+         isOnline: {
+            type: Boolean
          },
          conversation: {
             type: String

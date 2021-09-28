@@ -17,7 +17,6 @@ module.exports.registerUser = async (req, res) => {
         const email = emailinput.toLowerCase()
         const user = new User({ name, email })
         const registerUser = await User.register(user, password);
-        console.log(registerUser);
         req.login(registerUser, err => {
             if (err) return next(err)
             res.redirect(`/user`)
@@ -69,6 +68,39 @@ module.exports.renderUser = async (req, res) => {
         email: '',
         name: ''
     }
+
+    // if (user.contacts.length) {
+    //     user.contacts.forEach(async (contact) => {
+    //         const Allcontacts = []
+    //         const eachContact = await User.findById(contact._id);
+    //         await Allcontacts.push(eachContact)
+
+    //         return res.render("chat", { user, findconversation, Allcontacts, ConversationContact, title: `${user.name} | Chat Rooms` });
+    //     })
+
+    // }
+
+    io.on('connection', async (socket) => {
+        socket.id = user._id
+        console.log(`a user is online ${socket.id}`);
+        const userState = await User.findByIdAndUpdate(user._id, { isOnline: true })
+        // socket.emit("user_online", message)
+
+        userState.contacts.forEach(async contact => {
+            const updateContact = await User.updateOne({ _id: contact._id, contacts: { $elemMatch: { email: `${user.email}`, _id: `${user._id}` } } }, { $set: { "contacts.$.isOnline": true } })
+        })
+        // socket.on("send_message", (data) => {
+        //     socket.emit("reseve_message", message)
+        // })
+        socket.on('disconnect', async () => {
+            const userState = await User.findByIdAndUpdate(user._id, { isOnline: false })
+            userState.contacts.forEach(async contact => {
+                const updateContact = await User.updateOne({ _id: contact._id, contacts: { $elemMatch: { email: `${user.email}`, _id: `${user._id}` } } }, { $set: { "contacts.$.isOnline": false } })
+            })
+            console.log('user disconnected');
+        });
+    });
+
     res.render("chat", { user, findconversation, ConversationContact, title: `${user.name} | Chat Rooms` });
 
 }
@@ -93,6 +125,20 @@ module.exports.renderConversation = async (req, res) => {
     }
     res.render("chat", { user, findconversation, contact, ConversationContact, currentUser, title: `${user.name} | Chat Rooms` });
 
+
+    io.on('connection', (socket) => {
+        socket.id = user._id
+        console.log(`a user with id ${socket.id} join the chat room ${findconversation._id}`);
+        // socket.emit("join_room", message)
+
+        // socket.on("send_message", (data) => {
+        //     socket.emit("reseve_message", message)
+        // })
+        socket.on('disconnect', () => {
+            console.log('user disconnected');
+        });
+    });
+
 }
 
 // redirect to chat page
@@ -112,7 +158,6 @@ module.exports.sendMessage = async (req, res) => {
         if (participant.email !== user.email) return contactEmail = participant.email
     })
     const contact = await User.findOne({ email: contactEmail })
-    console.log(contact)
     const ConversationContact = await User.findOne({ email: contactEmail })
     const room = req.params.id
 
@@ -132,20 +177,20 @@ module.exports.sendMessage = async (req, res) => {
     const updateUser = await User.updateOne({ _id: user._id, contacts: { $elemMatch: { email: `${contact.email}`, _id: `${contact._id}` } } }, { $set: { "contacts.$.lastMessage": `${message}` } })
     const updateContact = await User.updateOne({ _id: contact._id, contacts: { $elemMatch: { email: `${user.email}`, _id: `${user._id}` } } }, { $set: { "contacts.$.lastMessage": `${message}` } })
 
-    // io.on('connection', (socket) => {
-    //     console.log(`a user connected ${socket.id}`);
+    io.on('connection', (socket) => {
+        socket.id = user._id
+        console.log(`a user sends a message ${socket.id}`);
 
-    //     socket.on("room", (data) => {
-    //         socket.join(data)
-    //         console.log(data);
-    //     })
 
-    //     socket.to(room).emit("reseve_message", message)
+        socket.emit("send_message", message)
 
-    //     socket.on('disconnect', () => {
-    //         console.log('user disconnected');
-    //     });
-    // });
+        // socket.on("send_message", (data) => {
+        //     socket.emit("reseve_message", message)
+        // })
+        socket.on('disconnect', () => {
+            console.log('user disconnected');
+        });
+    });
 
     if (contact.email === user.email) {
         req.flash("add_user_error", "You can not add your self to your contacts");
@@ -155,7 +200,7 @@ module.exports.sendMessage = async (req, res) => {
         req.flash("add_user_error", "User is already Added to your contacts");
         return res.redirect(`/user/${findconversation._id}`)
     }
-    const addUser = await User.findByIdAndUpdate(contact._id, { $push: { contacts: { _id: user._id, name: user.name, email: user.email, lastMessage: "", conversation: conversation._id } } });
+    const addUser = await User.findByIdAndUpdate(contact._id, { $push: { contacts: { _id: user._id, name: user.name, email: user.email, lastMessage: message, conversation: conversation._id } } });
     req.flash("add_user_success", `${contact.name} added to your contacts`);
     return res.redirect(`/user/${findconversation._id}`)
 }
