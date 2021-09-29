@@ -107,10 +107,10 @@ select:-webkit-autofill:focus {
                border: none;
                background-color: rgb(0 0 0 / 10%);
                font-size: 0.9rem;
-               color: rgb(197, 197, 197);
+               color: #575757;
                border-radius: 5px 0 0 5px;
                &:focus {
-                  color: rgb(197, 197, 197);
+                  color: #575757;
                   outline: none;
                }
             }
