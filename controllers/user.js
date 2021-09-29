@@ -69,10 +69,6 @@ module.exports.addUser = async (req, res) => {
 module.exports.renderUser = async (req, res) => {
     const user = await User.findById(req.user.id)
     const findconversation = await Conversation.findById(req.params.id)
-    const ConversationContact = {
-        email: '',
-        name: ''
-    }
 
     const changeState = async (state) => {
         const userState = await User.findByIdAndUpdate(user._id, { isOnline: state })
@@ -89,14 +85,9 @@ module.exports.renderUser = async (req, res) => {
         });
     });
 
-    res.render("chat", { user, findconversation, ConversationContact, title: `${user.name} | Chat Rooms` });
-
+    res.render("user", { user, findconversation, title: `${user.name} | Chat Rooms` });
 }
 
-
-module.exports.renderTest = async (req, res) => {
-    res.render("user", { title: `test | Chat Rooms` });
-}
 
 // render chat page of a contact
 module.exports.renderConversation = async (req, res) => {
@@ -116,7 +107,7 @@ module.exports.renderConversation = async (req, res) => {
     if (!findconversation) {
         return res.redirect(`/user`)
     }
-    res.render("chat", { user, findconversation, contact, ConversationContact, currentUser, title: `${user.name} | Chat Rooms` });
+    res.render("conversation", { user, findconversation, contact, ConversationContact, currentUser, title: `${user.name} | Chat Rooms` });
 }
 
 // redirect to chat page

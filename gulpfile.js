@@ -65,6 +65,16 @@ function scssTask5() {
    ); // seting the destination of the compiled css and the map file to a folder called dist
 }
 
+function scssTask6() {
+   return (
+      src("public/scss/conversation.scss", { sourcemaps: true }) // selecting the style/main scss file || { sourcemaps: true } will generate a .css.map file (show which scss file  the styles are coming from)
+         .pipe(sass()) // running sass function to compile scss to css
+         .pipe(postcss([autoprefixer(), cssnano()])) // using autoprefixer function will add the browser prefixes to support older browsers || and cssnano function to minify css file
+         // .pipe(rev())
+         .pipe(dest("dist/CSS", { sourcemaps: "." }))
+   ); // seting the destination of the compiled css and the map file to a folder called dist
+}
+
 // JavaScript Task
 function jsTask1() {
    return (
@@ -78,7 +88,7 @@ function jsTask1() {
 
 function jsTask2() {
    return (
-      src("public/js/chat.js", { sourcemaps: true }) // selecting the js file || { sourcemaps: true } will generate a .js.map file (show which js file  the scripts are coming from)
+      src("public/js/conversation.js", { sourcemaps: true }) // selecting the js file || { sourcemaps: true } will generate a .js.map file (show which js file  the scripts are coming from)
          .pipe(babel({ presets: ["@babel/preset-env"] })) // running babel function to compile JavaScript to older versions so old browsers can run it with no problems
          .pipe(terser()) // using terser function to minify JavaScript file
          // .pipe(rev())
@@ -128,6 +138,7 @@ function watchTask() {
          scssTask3,
          scssTask4,
          scssTask5,
+         scssTask6,
          jsTask1,
          jsTask2,
          jsTask3,
@@ -144,6 +155,7 @@ exports.default = series(
    scssTask3,
    scssTask4,
    scssTask5,
+   scssTask6,
    jsTask1,
    jsTask2,
    jsTask3,

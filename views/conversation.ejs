@@ -1,0 +1,64 @@
+<link rel="stylesheet" href="/CSS/conversation.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="user_wrapper">
+                <div class="user_info">
+                    <a href="/user" class="go_back"><i class="fas fa-arrow-left"></i></a>
+
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIQTDD7FUwpZ-h9vS9EflnjcKP3_ORFo90lA&usqp=CAU"
+                        alt="">
+
+                    <div class="user_name_state">
+                        <div class="name">Jhon Doe</div>
+                        <div class="state">Active now</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="messages" class="conversation_wrapper">
+                <div class="conversation_container">
+                    <% if (findconversation){ findconversation.messages.forEach(message=> {%>
+                        <% if(message.author.email===currentUser.email){ %>
+
+                            <div class="message-received">
+                                <div class="body"><span>
+                                        <%= message.body %>
+                                    </span></div>
+                                <div class="author">
+                                    <span class="time">
+                                        <%= new Date(message.timestamp).toString().slice(16,21).trim() %>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <% }else{ %>
+
+                                <div class="message-sent">
+                                    <div class="body"><span>
+                                            <%= message.body %>
+                                        </span></div>
+                                    <div class="author">
+                                        <span class="time">
+                                            <%= new Date(message.timestamp).toString().slice(16,21).trim() %>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <% } %>
+
+                                    <% });} %>
+                </div>
+            </div>
+
+            <div class="send_message">
+                <form action="/user/<%= findconversation._id %>" method="POST">
+                    <input type="text" name="message" placeholder="Type a message here...">
+                    <button><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/js/conversation.js"></script>

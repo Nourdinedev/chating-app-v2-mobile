@@ -25,9 +25,6 @@ router.post("/sign-in", toLowercase, UserControllers.login, catchAsync(UserContr
 
 router.get("/sign-out", UserControllers.logoutUser);
 
-router.get("/test", catchAsync(UserControllers.renderTest));
-
-
 router.route("/:id")
     .get(isLoggedIn, catchAsync(UserControllers.renderConversation))
     .post(isLoggedIn, catchAsync(UserControllers.sendMessage));

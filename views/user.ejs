@@ -7,15 +7,17 @@
             <div class="user_wrapper">
                 <div class="user_info">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIQTDD7FUwpZ-h9vS9EflnjcKP3_ORFo90lA&usqp=CAU"
-                        alt="">
+                        alt="<%= user.name %>">
 
                     <div class="user_name_state">
-                        <div class="name">Jhon Doe</div>
+                        <div class="name">
+                            <%= user.name %>
+                        </div>
                         <div class="state">Active now</div>
                     </div>
 
                     <div class="user_logout">
-                        <form action="">
+                        <form action="/user/sign-out" method="GET">
                             <button>Logout</button>
                         </form>
                     </div>
@@ -30,25 +32,31 @@
             </div>
 
             <div class="contact_wrapper">
-                <a href="#" class="contact_container">
-                    <img src="https://d5nunyagcicgy.cloudfront.net/external_assets/hero_examples/hair_beach_v391182663/original.jpeg"
-                        alt="">
-                    <div class="contact_name_lastMessage">
-                        <div class="name">Locass Hob</div>
-                        <div class="lastMessage">last message sent...</div>
-                    </div>
-                    <div class="contact_state"></div>
-                </a>
 
-                <a href="#" class="contact_container">
-                    <img src="https://d5nunyagcicgy.cloudfront.net/external_assets/hero_examples/hair_beach_v391182663/original.jpeg"
-                        alt="">
-                    <div class="contact_name_lastMessage">
-                        <div class="name">Locass Hob</div>
-                        <div class="lastMessage">last message sent...</div>
-                    </div>
-                    <div class="contact_state"></div>
-                </a>
+                <% user.contacts.forEach(contact=> {%>
+                    <a href="/user/<%= contact.conversation %>" class="contact_container">
+                        <img src="https://d5nunyagcicgy.cloudfront.net/external_assets/hero_examples/hair_beach_v391182663/original.jpeg"
+                            alt="<%= contact.name %> profile image">
+                        <div class="contact_name_lastMessage">
+                            <div class="name">
+                                <%= contact.name %>
+                            </div>
+                            <% if(contact.lastMessage==="" ){ %>
+                                <div class="lastMessage">No message sent yet...</div>
+                                <% }else{ %>
+                                    <div class="lastMessage">
+                                        <%= contact.lastMessage.trim().slice(0,15) %>...
+                                    </div>
+                                    <% } %>
+                        </div>
+                        <% if(contact.isOnline){ %>
+                            <div class="contact_state"></div>
+                            <% }else{ %>
+                                <div class="offline-state"></div>
+                                <% } %>
+                    </a>
+                    <% }) %>
+
             </div>
         </div>
     </div>
