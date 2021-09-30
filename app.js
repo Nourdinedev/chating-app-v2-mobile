@@ -13,10 +13,6 @@ const session = require("express-session")
 //require flash
 const flash = require("connect-flash")
 
-// set up socket
-const { Server } = require("socket.io");
-module.exports.io = new Server(server, { log: false });
-
 // require mongoose
 const mongoose = require("mongoose");
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/chating";

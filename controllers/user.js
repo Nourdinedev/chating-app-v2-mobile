@@ -2,8 +2,6 @@
 const User = require("../models/user");
 const Conversation = require("../models/conversation")
 
-const { io } = require("../app")
-
 //require passport
 const passport = require("passport");
 const conversation = require("../models/conversation");
@@ -76,14 +74,6 @@ module.exports.renderUser = async (req, res) => {
             const updateContact = await User.updateOne({ _id: contact._id, contacts: { $elemMatch: { email: `${user.email}`, _id: `${user._id}` } } }, { $set: { "contacts.$.isOnline": state } })
         })
     }
-
-    io.on('connection', async (socket) => {
-        changeState(true)
-
-        socket.on('disconnect', async () => {
-            changeState(false)
-        });
-    });
 
     res.render("user", { user, findconversation, title: `${user.name} | Chat Rooms` });
 }
