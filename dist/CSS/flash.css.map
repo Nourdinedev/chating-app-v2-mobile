@@ -1,0 +1,1 @@
+{"version":3,"sources":["flash.scss","flash.css"],"names":[],"mappings":"AAAA,eAGG,aAAA,CACA,eAAA,CAHA,iBAAA,CACA,SCGH","file":"flash.css","sourcesContent":[".error-message {\r\n   position: absolute;\r\n   top: 145px;\r\n   color: #e63b28;\r\n   font-weight: 400;\r\n}\r\n",".error-message {\n  position: absolute;\n  top: 145px;\n  color: #e63b28;\n  font-weight: 400;\n}"]}
